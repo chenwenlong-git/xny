@@ -171,7 +171,7 @@
             bidtype="上传";
             $(this).uploadify({
                 swf: '../../external/uploadify/uploadify.swf',
-                uploader: "ajax.php",  //处理上传的php文件或者方法
+                uploader: "/ajax.php?act=uploadify",  //处理上传的php文件或者方法
                 multi: true,  //是否开启一次性上传多个文件
                 queueSizeLimit:20,  //最大允许上传的文件数量
                 buttonText: bidtype,        //按钮文字
