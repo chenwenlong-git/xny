@@ -14,10 +14,10 @@
             <![endif]-->
 </head>
 <body>
-<?php require_once 'public/header/header.php';?>
+<?php require_once '../../public/header/header.php';?>
     <div class="ch-container">
         <div class="row">
-            <?php require_once 'public/nav/nav.php';?>
+            <?php require_once '../../public/nav/nav.php';?>
             <div id="content" class="col-sm-10 col-lg-10">
                 <div>
                     <ul class="breadcrumb">
@@ -81,7 +81,6 @@
     </div>
     <script src="public/js/jquery-1.11.1.min.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
-    <script src="public/js/wx.js"></script>
     <script>
         $(document).ready(function () {
             $("#inputs").change(function () {
