@@ -68,7 +68,7 @@
                                     <a href="#">性能数据</a>
                                 </li>
                                 <li>
-                                    <a href="#">安全数据</a>
+                                    <a href="/class/physicaldata/safedata.php">安全数据</a>
                                 </li>
                                 <li>
                                     <a href="#">可追溯数据</a>
