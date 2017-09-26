@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/css/bootstrap-cerulean.min.css">
     <link rel="stylesheet" href="../../public/css/wx-app.css">
+    <link rel="stylesheet" href="../../external/uploadify/uploadify.css">
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -82,7 +83,11 @@
                            placeholder="请选择QP图片导入">
                 </div>
                 <div class="form-group">
-                    <input type="file" id="inputfile">
+                    <span id="commercial_upload" class="uploadbutton"></span>
+<!--                    <input type="file" id="inputfile">-->
+                </div>
+                <div class="form-group" id="img_show">
+
                 </div>
                 <div class="form-group2">
                     <button>提交</button>
@@ -137,6 +142,8 @@
 </div>
 <script src="../../public/js/jquery-1.11.1.min.js"></script>
 <script src="../../public/js/bootstrap.min.js"></script>
+<script src="../../external/uploadify/jquery.uploadify.js"></script>
+
 <script>
     $(document).ready(function () {
         $("#inputs").change(function () {
@@ -157,6 +164,32 @@
             innerImg.innerHTML += "<a  style='padding-left:10px'>aaa</a>";
         };
     }
+
+    $(function(){
+        $(".uploadbutton").each(function(){
+            alert(999);
+            bidtype="上传";
+            $(this).uploadify({
+                swf: '../../external/uploadify/uploadify.swf',
+                uploader: "ajax.php",  //处理上传的php文件或者方法
+                multi: true,  //是否开启一次性上传多个文件
+                queueSizeLimit:20,  //最大允许上传的文件数量
+                buttonText: bidtype,        //按钮文字
+                height: 34,               //按钮高度
+                width: 82,               //按钮宽度
+                auto:false,  //选择完图片以后是否自动上传
+                method:'post',
+                fileTypeExts: "*.jpg;*.png;*.gif;*.jpeg;",      //允许的文件类型
+                fileTypeDesc: "请选择图片文件",      //文件说明
+                postData:{},
+                formData: { "imgType": "normal","timestamp":"asdfsa","token":"48f262516b3912a060d21ef6af564668" }, //提交给服务器端的参数
+                onUploadSuccess: function (file, data, response) {  //一个文件上传成功后的响应事件处理
+                    var data = $.parseJSON(data);
+                    $('#img_show').html('<img src="'+data+'" width="200" height="250"  />');
+                }
+            });
+        })
+    });
 </script>
 </body>
 </html>
