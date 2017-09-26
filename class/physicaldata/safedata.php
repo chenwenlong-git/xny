@@ -12,6 +12,24 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <style>
+        .form-group2{
+            margin-bottom: 5px;
+        }
+        .form-group2 label{
+            text-align: right;
+            min-width: 85px;
+            margin-right: 5px;
+        }
+        .QP-img label{
+            text-align: right;
+            min-width: 85px;
+            margin-right: 5px;
+        }
+        .form-inline{
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 <?php require_once '../../public/header/header.php'; ?>
@@ -25,58 +43,94 @@
                         <a href="#">首页</a>
                     </li>
                     <li>
-                        <a href="#">出厂前数据录入</a>
+                        <a href="#">安全数据</a>
                     </li>
                 </ul>
             </div>
             <!-- 表单 -->
+            <h4>安全数据录入</h4>
             <form class="form-inline" role="form">
                 <div class="form-group">
-                    <label for="firstname">订单号</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入订单号">
+                    <label for="firstname">Vin码</label>
+                    <input type="text" class="form-control vincode" id="vincode"
+                           placeholder="请输入Vin码(17位字母数字组合)" autocomplete="on">
                 </div>
                 <div class="form-group">
-                    <input type="file" id="inputs" multiple="multiple">
-
+                    <button class="op-botton" type="button">检索</button>
                 </div>
             </form>
-            <div id='desti'>
-                <iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' frameborder='0'></iframe>
+            <div class="navbar navbar-default"><span class="navbar-brand">QP单</span></div>
+            <form class="form-inline" role="form">
+                <div class="form-group2">
+                    <label for="firstname">车型：</label>
+                    <input type="text" class="form-control" id="firstname"
+                           placeholder="请输入车型编号">
+                </div>
+                <div class="form-group2">
+                    <label for="firstname">生产流水号：</label>
+                    <input type="text" class="form-control" id="firstname"
+                           placeholder="请输入生产流水号">
+                </div>
+                <div class="form-group2">
+                    <label for="firstname">电机号：</label>
+                    <input type="text" class="form-control" id="firstname"
+                           placeholder="请输入电机号">
+                </div>
+                <div class="form-group QP-img">
+                    <label for="firstname">QP单(图)：</label>
+                    <input type="text" class="form-control" id="firstname"
+                           placeholder="请选择QP图片导入">
+                </div>
+                <div class="form-group">
+                    <input type="file" id="inputfile">
+                </div>
+                <div class="form-group2">
+                    <button>提交</button>
+                </div>
+            </form>
+            <div class="navbar navbar-default"><span class="navbar-brand">检测线数据</span></div>
+            <form class="form-inline" role="form">
+                <div class="form-group2">
+                    <label for="firstname">车型：</label>
+                    <input type="text" class="form-control" id="firstname"
+                           placeholder="请输入车型编号">
+                </div>
+                <div class="form-group2">
+                    <label for="firstname">生产流水号：</label>
+                    <input type="text" class="form-control" id="firstname"
+                           placeholder="请输入生产流水号">
+                </div>
+                <div class="form-group2">
+                    <label for="firstname">电机号：</label>
+                    <input type="text" class="form-control" id="firstname"
+                           placeholder="请输入电机号">
+                </div>
+                <div class="form-group QP-img">
+                    <label for="firstname">检测线数据：</label>
+                    <input type="text" class="form-control" id="firstname"
+                           placeholder="请选择检测线数据图片导入">
+                </div>
+                <div class="form-group">
+                    <input type="file" id="inputfile">
+                </div>
+                <div class="form-group2">
+                    <button>提交</button>
+                </div>
+            </form>
+            <div class="">
+                <ul>
+                    <li>录入日志</li>
+                    <li>错误</li>
+                </ul>
             </div>
-            <div class="navbar navbar-default"><span class="navbar-brand">合同--技术协议</span></div>
-            <form class="form-inline" role="form">
-                <div class="form-group">
-                    <label for="firstname">合同文档</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入订单号">
+            <div class="" role="">
+                <div class="">
+                    <label for="firstname">录入日志</label>
                 </div>
                 <div class="form-group">
-                    <input type="file" id="inputfile">
+                    <label for="firstname">错误</label>
                 </div>
-            </form>
-            <div class="navbar navbar-default"><span class="navbar-brand">配置单</span></div>
-            <form class="form-inline" role="form">
-                <div class="form-group">
-                    <label for="firstname">配置单</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入订单号">
-                </div>
-                <div class="form-group">
-                    <input type="file" id="inputfile">
-                </div>
-            </form>
-            <div class="navbar navbar-default"><span class="navbar-brand">配置单</span></div>
-            <form class="form-inline" role="form">
-                <div class="form-group">
-                    <label for="firstname">BOM单</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入订单号">
-                </div>
-                <div class="form-group">
-                    <input type="file" id="inputfile">
-                </div>
-            </form>
+            </div>
 
         </div>
     </div>
