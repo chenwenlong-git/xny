@@ -5,7 +5,7 @@
                         <!-- ÏµÍ³¹ÜÀí -->
                         <li class="nav-header">系统管理</li>
                         <li class="accordion">
-                            <a href="index.php">
+                            <a href="../../index.php">
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>人员权限</span>
                             </a>
@@ -54,7 +54,7 @@
                             </a>
                             <ul class="nav nav-pills nav-stacked" style="display:block">
                                 <li class="active">
-                                    <a href="#">出厂前数据</a>
+                                    <a href="../../class/soft_data/factory_data.php">出厂前数据</a>
                                 </li>
                             </ul>
                         </li>
@@ -65,13 +65,13 @@
                             </a>
                             <ul class="nav nav-pills nav-stacked" style="display:block">
                                 <li>
-                                    <a href="#">性能数据</a>
+                                    <a href="../../class/physicaldata/perfor_data.php">性能数据</a>
                                 </li>
                                 <li>
-                                    <a href="/class/physicaldata/safedata.php">安全数据</a>
+                                    <a href="../../class/physicaldata/safedata.php">安全数据</a>
                                 </li>
                                 <li>
-                                    <a href="#">可追溯数据</a>
+                                    <a href="../../class/physicaldata/">可追溯数据</a>
                                 </li>
                             </ul>
                         </li>

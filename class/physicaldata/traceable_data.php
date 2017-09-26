@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="上海万象 万象信息管理">
     <!--     <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/bootstrap-cerulean.min.css">
-    <link rel="stylesheet" href="public/css/wx-app.css">
+    <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/css/bootstrap-cerulean.min.css">
+    <link rel="stylesheet" href="../../public/css/wx-app.css">
             <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
 </head>
 <body>
-<?php require_once 'public/header/header.php';?>
+<?php require_once '../../public/header/header.php';?>
     <div class="ch-container">
         <div class="row">
-            <?php require_once 'public/nav/nav.php';?>
+            <?php require_once '../../public/nav/nav.php';?>
             <div id="content" class="col-sm-10 col-lg-10">
                 <div>
                     <ul class="breadcrumb">

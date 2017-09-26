@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
+<!--     让页面具备记忆功能 -->
+    <!-- <meta http-equiv="Content-Type" content="index.php; charset=UTF-8"> -->
+    <!-- <meta name="save" content="history"> -->
     <title>万象信息管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="上海万象 万象信息管理">
@@ -9,12 +12,33 @@
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/bootstrap-cerulean.min.css">
     <link rel="stylesheet" href="public/css/wx-app.css">
+<!--     <link rel="stylesheet" href="public/css/autocomplete.css">
+<link rel="stylesheet" href="style.css"> -->
             <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
+<!--     自动完成  -->
+<!--     <script src="public/js/autocomplete.js"></script>
+<script src="public/js/jquery.js"></script> -->
+    <script type="text/javascript">
+
+/*    var proposals = ['百度1', '百度2', '百度3', '百度4', '百度5', '百度6', '百度7','呵呵呵呵呵呵呵','百度','新浪','a1','a2','a3','a4','b1','b2','b3','b4'];
+
+    $(document).ready(function(){
+        $('#search-form').autocomplete({
+            hints: proposals,
+            width: 300,
+            height: 30,
+            onSubmit: function(text){
+                $('#message').html('Selected: <b>' + text + '</b>');            
+            }
+        });
+    });*/
+    </script>    
 </head>
 <body>
 <?php require_once 'public/header/header.php';?>
+
     <div class="ch-container">
         <div class="row">
             <?php require_once 'public/nav/nav.php';?>
@@ -30,6 +54,15 @@
                     </ul>
                 </div>
                 <!-- 表单 -->
+                
+                <!-- <div id="demo">
+                                    <div class="wrapper">
+                                        <h3>试试输入"百度"</h3>
+                                        <div id="search-form"></div>
+                                        <div id="message"></div>
+                                    </div>
+                                </div>       -->                
+
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">订单号</label>
@@ -37,11 +70,12 @@
                            placeholder="请输入订单号">                           
                     </div>
                     <div class="form-group">
-                        <input type="file" id="inputs" multiple="multiple">
-                                              
+                        <input type="file" id="inputs" multiple="multiple">                                              
                     </div>
                 </form>
-                <div id='desti' ><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' frameborder='0'></iframe></div>
+                <div id='desti' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
+                <button type="button" class="btn btn-primary btn-lg" onclick="file_submit()">提交</button>
+                <br> <br>
                 <div class="navbar navbar-default"><span class="navbar-brand">合同--技术协议</span></div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
@@ -79,9 +113,13 @@
             </div>
         </div>
     </div>
-    <script src="public/js/jquery-1.11.1.min.js"></script>
+
     <script src="public/js/bootstrap.min.js"></script>
-    <script src="public/js/wx.js"></script>
+    <script src="public/js/jquery-1.11.1.min.js"></script>
+<!--     <script src="public/js/wx.js"></script> -->
+    <script>
+
+    </script>
     <script>
         $(document).ready(function () {
             $("#inputs").change(function () {
@@ -90,7 +128,7 @@
                     reads(fil[i]);
                 }
             });
-        });
+        
         var innerImg=document.getElementById("desti");
         function reads(fil){
             var reader = new FileReader();
@@ -98,9 +136,24 @@
 
             reader.onload = function()
             {
-                innerImg.innerHTML+= "<img src='001.png'></br>";
-                innerImg.innerHTML+= "<a  style='padding-left:10px'>aaa</a>";
+                innerImg.innerHTML+= "<div class='_imgs' style='width:80px;height:80px;text-align:center;position: relative'><button type='button' style='position:absolute;top 0px;right:0px'> &times;</button><img src='001.png' class='doubclic'></br><a style='padding-left:10px'>双击后打开</a></div>";
             };
+        }
+        });
+        //双击后打开
+        $("#desti").on("dblclick","div",function(){
+            $("iframe").css("display","block");
+            $(this).hide();
+        })
+        $("#desti").on('click','button',function(){
+            var _close=confirm("确定要删除吗？");
+            if(_close){
+                $(this).parent().remove();
+            }
+        })
+        //文件提交
+        function file_submit(){
+            confirm("您确定要提交吗？")
         }
     </script>
 </body>
