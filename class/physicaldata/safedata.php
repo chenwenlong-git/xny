@@ -66,7 +66,7 @@
         .safe-log{
             border-top: 1px solid #989191;
         }
-        .log-detail{
+        #myTabContent{
             height: 200px;
             max-height: 200px;
             overflow: auto;

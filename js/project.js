@@ -930,7 +930,11 @@ SE.checkVinCode=function(num){//num=0:QP单，num=1:检测线数据，
                 $(".check-info").html("<p style='color:green;'>"+e.message+"</p>");
                 $("#log").append("<p style='color:green;'>"+e.message+"</p>");
                 $(".op-log").click();
-            } else{
+            } else if(e.code==3){
+                $(".check-info").html("<p style='color:#ff9800;'>"+e.message+"</p>");
+                $("#log").append("<p style='color:#ff9800;'>"+e.message+"</p>");
+                $(".op-log").click();
+            }else{
                 $(".check-info").html("<p style='color:red;'>"+e.message+"</p>");
                 $("#err").append("<p style='color:red;'>"+e.message+"</p>");
                 $(".op-err").click();

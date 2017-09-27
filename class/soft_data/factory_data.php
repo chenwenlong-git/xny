@@ -21,7 +21,14 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
 <!--     自动完成  -->
-
+    <style>
+        #myTabContent{
+            height: 200px;
+            max-height: 200px;
+            overflow: auto;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <?php require_once '../../public/header/header.php';?>
@@ -48,9 +55,9 @@
                            <input type="text" class="form-control OrderNum" id="OrderNum" placeholder="请输入订单号">
                     </div>
                     <div class="form-group">
-                        <button type="button" onclick="SE.checkOrderNum();">检索</button>
+                        <button type="button" onclick="SE.checkOrderNum();" class="op-botton btn btn-primary btn-sm">检索</button>
                     </div>
-                    <div class="check-info" style="display: none;margin-bottom: -10px;margin-top: 10px;margin-left: 40px;">
+                    <div class="check-info" style="display: none;margin-bottom: -40px;margin-top: 10px;margin-left: 40px;">
                     </div>
                 </form>
                 <br> <br>
@@ -141,7 +148,7 @@
                     reads(fil[i]);
                     val2 += fil[i].name + ";";
                 }
-                $(".factor-doc2").val(val3);
+                $(".factor-doc2").val(val2);
             });
             $(".inputs_three").change(function () {
             this_="inputs_three";

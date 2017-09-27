@@ -84,9 +84,18 @@ switch ($act) {
             if (!preg_match('/^(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{17}$/', $_POST["VinCode"])) {
                 outData('2', 'Vin码请输入17位字母和数字的组合', 'VinCode');
             }
-            $temp = $db->find("select * from com_datasafe where VinCode='" . $_POST["VinCode"] . "'");
+            $temp = $db->findAll("select * from com_datasafe where VinCode='" . $_POST["VinCode"] . "'");
             if($temp){
-                outData('2', 'Vin码已存在，请重新输入', 'VinCode');
+                if(count($temp)==1){
+                    if($temp[0]["Type"]==1){
+                        outData('3', 'Vin码已存在，其QP单未录入', 'VinCode');
+
+                    }else{
+                        outData('3', 'Vin码已存在，其检测线数据未录入', 'VinCode');
+                    }
+                }else{
+                    outData('2', 'Vin码已存在,请重新输入Vin码', 'VinCode');
+                }
             }else{
                 outData('1', 'Vin码可用', 'VinCode');
             }
@@ -182,11 +191,11 @@ switch ($act) {
                     outData('3', '该订单号已存在，其'.$resName.'未录入！');
                 }
             }else{
-                outData('1', 'Vin码可用', 'VinCode');
+                outData('1', '订单号可用');
             }
             outData(2, "操作失败");
         }
-        outData(2, "请输入Vin码");
+        outData(2, "请输入订单号");
     default:
         return;
 }
