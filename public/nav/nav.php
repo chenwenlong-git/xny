@@ -71,7 +71,7 @@
                                     <a href="../../class/physicaldata/safedata.php">安全数据</a>
                                 </li>
                                 <li>
-                                    <a href="../../class/physicaldata/">可追溯数据</a>
+                                    <a href="/class/physicaldata/tracedata.php">可追溯数据</a>
                                 </li>
                             </ul>
                         </li>
