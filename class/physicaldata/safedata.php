@@ -157,7 +157,7 @@
     uploader.on( 'fileQueued', function( file ) {
         var $list = $("#fileList"),
             $li = $(
-                '<div id="' + file.id + '" class="file-item thumbnail" style="display: inline-block;">' +
+                '<div id="' + file.id + '" class="file-item thumbnail" style="display: inline-block;margin-right: 15px;"><button type="button" style="z-index:999;position:absolute;top 0px;right:0px;top:-1px;"> &times;</button>' +
                 '<img>' +
                 '<div class="info">' + file.name + '</div>' +
                 '</div>'
