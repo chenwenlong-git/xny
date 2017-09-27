@@ -12,29 +12,6 @@
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/bootstrap-cerulean.min.css">
     <link rel="stylesheet" href="public/css/wx-app.css">
-<!--     <link rel="stylesheet" href="public/css/autocomplete.css">
-<link rel="stylesheet" href="style.css"> -->
-            <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-            <![endif]-->
-<!--     自动完成  -->
-<!--     <script src="public/js/autocomplete.js"></script>
-<script src="public/js/jquery.js"></script> -->
-    <script type="text/javascript">
-
-/*    var proposals = ['百度1', '百度2', '百度3', '百度4', '百度5', '百度6', '百度7','呵呵呵呵呵呵呵','百度','新浪','a1','a2','a3','a4','b1','b2','b3','b4'];
-
-    $(document).ready(function(){
-        $('#search-form').autocomplete({
-            hints: proposals,
-            width: 300,
-            height: 30,
-            onSubmit: function(text){
-                $('#message').html('Selected: <b>' + text + '</b>');            
-            }
-        });
-    });*/
-    </script>    
 </head>
 <body>
 <?php require_once 'public/header/header.php';?>

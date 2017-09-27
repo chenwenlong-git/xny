@@ -2,14 +2,13 @@
                 <div class="sidebar-nav">
                     <ul class="nav nav-pills nav-stacked main-menu">
                         <li class="nav-header">首页</li>
-                        <!-- ÏµÍ³¹ÜÀí -->
                         <li class="nav-header">系统管理</li>
                         <li class="accordion">
-                            <a href="../../index.php">
+                            <a href="#person" data-toggle="collapse">
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>人员权限</span>
                             </a>
-                            <ul class="nav nav-pills nav-stacked" style="display:block">
+                            <ul class="nav nav-pills nav-stacked collapse" id="person">
                                 <li>
                                     <a href="#">用户资料</a>
                                 </li>
@@ -19,11 +18,11 @@
                             </ul>
                         </li>
                         <li class="accordion">
-                            <a href="#" >
+                            <a href="#" class="link">
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>日志管理</span>
                             </a>
-                            <ul class="nav nav-pills nav-stacked" style="display:block">
+                            <ul class="nav nav-pills nav-stacked">
                                 <li>
                                     <a href="#">操作日志</a>
                                 </li>
@@ -34,18 +33,14 @@
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>系统设置</span>
                             </a>
-                            <ul class="nav nav-pills nav-stacked" style="display:block">
+                            <ul class="nav nav-pills nav-stacked">
                                 <li>
                                     <a href="#">参数管理</a>
                                 </li>
                             </ul>
                         </li>
-                        <!-- Êý¾Ý²É¼¯ -->
                         <li class="nav-header">
-                            <a href="#" class="">
-                                <i class="glyphicon glyphicon-home"></i>
-                                <span>数据采集</span>
-                            </a>
+                            数据采集
                         </li>
                         <li class="accordion">
                             <a href="#" >
@@ -71,41 +66,35 @@
                                     <a href="../../class/physicaldata/safedata.php">安全数据</a>
                                 </li>
                                 <li>
-                                    <a href="/class/physicaldata/tracedata.php">可追溯数据</a>
+                                    <a href="../../class/physicaldata/traceable_data.php">可追溯数据</a>
                                 </li>
                             </ul>
                         </li>
-                        <!-- Êý¾Ý²éÑ¯ -->
+
                         <li class="nav-header">
-                            <a href="#" class="">
-                                <i class="glyphicon glyphicon-home"></i>
-                                <span>数据查询</span>
-                            </a>
+                            数据查询
                         </li>
                         <li class="accordion">
                             <a href="#" >
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>数据总览</span>
                             </a>
-                            <ul class="nav nav-pills nav-stacked" style="display:block">
+                            <ul class="nav nav-pills nav-stacked">
                                 <li>
                                     <a href="#">一车一档</a>
                                 </li>
                             </ul>
                         </li>
-                        <!-- Êý¾ÝÍ³¼Æ -->
+
                         <li class="nav-header">
-                            <a href="#" class="">
-                                <i class="glyphicon glyphicon-home"></i>
-                                <span>数据统计</span>
-                            </a>
+                            数据统计
                         </li>
                         <li class="accordion">
                             <a href="#" >
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>数据分析</span>
                             </a>
-                            <ul class="nav nav-pills nav-stacked" style="display:block">
+                            <ul class="nav nav-pills nav-stacked">
                                 <li>
                                     <a href="#">电池评价体系</a>
                                 </li>
@@ -114,19 +103,16 @@
                                 </li>
                             </ul>
                         </li>
-                        <!-- ¹¤×÷Ì¨ -->
+
                         <li class="nav-header">
-                            <a href="#" class="">
-                                <i class="glyphicon glyphicon-home"></i>
-                                <span>工作台</span>
-                            </a>
+                            工作台
                         </li>
                         <li class="accordion">
                             <a href="#" >
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>考勤打卡</span>
                             </a>
-                            <ul class="nav nav-pills nav-stacked" style="display:block">
+                            <ul class="nav nav-pills nav-stacked">
                                 <li>
                                     <a href="#">考勤组设置</a>
                                 </li>
@@ -140,7 +126,7 @@
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>维修工单</span>
                             </a>
-                            <ul class="nav nav-pills nav-stacked" style="display:block">
+                            <ul class="nav nav-pills nav-stacked">
                                 <li>
                                     <a href="#">维修工单设置</a>
                                 </li>
@@ -154,7 +140,7 @@
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>配件调货</span>
                             </a>
-                            <ul class="nav nav-pills nav-stacked" style="display:block">
+                            <ul class="nav nav-pills nav-stacked">
                                 <li>
                                     <a href="#">配件调货设置</a>
                                 </li>
