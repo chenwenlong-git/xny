@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="../../public/css/wx-app.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--     <link rel="stylesheet" href="public/css/autocomplete.css">
-<link rel="stylesheet" href="style.css"> -->
+    <script src="/js/project.js"></script>
+    <!--     <link rel="stylesheet" href="public/css/autocomplete.css">
+    <link rel="stylesheet" href="style.css"> -->
             <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
@@ -44,8 +45,7 @@
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">订单号</label>
-                           <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入订单号">
+                           <input type="text" class="form-control OrderNum" id="OrderNum" placeholder="请输入订单号">
                     </div>
                     <div class="form-group">
                         <button>检索</button>
@@ -57,43 +57,40 @@
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">合同文档</label>
-                           <input type="text" class="form-control" id="firstname"
+                           <input type="text" class="form-control factor-doc1 ContractUrl" id="ContractUrl"
                            placeholder="请输入文档">
                     </div>
                     <div class="form-group">
-                        <input type="file" class="inputs" multiple="multiple">
+                        <input type="file" class="inputs" multiple="multiple" accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" >
                     </div>
                 </form>
                 <div id='desti' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
-                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit()">提交</button> <br><br>
+                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(0)">提交</button> <br><br>
 
                 <div class="navbar navbar-default"><span class="navbar-brand">配置单</span></div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">配置单</label>
-                           <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入订单号">
+                           <input type="text" class="form-control factor-doc2 ConfigUrl" id="ConfigUrl" placeholder="请输入订单号">
                     </div>
                     <div class="form-group">
-                        <input type="file" class="inputs_two" multiple="multiple">
+                        <input type="file" class="inputs_two" multiple="multiple" accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" >
                     </div>
                 </form>
                 <div id='desti_two' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
-                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit()">提交</button> <br><br>
-
+                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(1)">提交</button> <br><br>
                 <div class="navbar navbar-default"><span class="navbar-brand">BOM单</span></div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">BOM单</label>
-                           <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入订单号">
+                           <input type="text" class="form-control factor-doc3 BOMUrl" id="BOMUrl" placeholder="请输入订单号">
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs_three" multiple="multiple">
                     </div>
                 </form>
                     <div id='desti_three' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="file_submit()">提交</button> <br><br>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(2)">提交</button> <br><br>
                 <!-- 录入日志和错误之间的切换 -->
                 <ul id="myTab" class="nav nav-tabs">
                     <li class="active">
@@ -102,30 +99,11 @@
                         </a>
                     </li>
                     <li><a href="#err" data-toggle="tab">错误</a></li>
-<!--                     <li class="dropdown">
-    <a href="#" id="myTabDrop1" class="dropdown-toggle"
-       data-toggle="dropdown">Java
-        <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-        <li><a href="#jmeter" tabindex="-1" data-toggle="tab">jmeter</a></li>
-        <li><a href="#ejb" tabindex="-1" data-toggle="tab">ejb</a></li>
-    </ul>
-</li> -->
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="log">
-                        <p>录入日志</p>
                     </div>
                     <div class="tab-pane fade" id="err">
-                        <p>错误显示</p>
-                    </div>
-                    <div class="tab-pane fade" id="jmeter">
-                        <p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
-                    </div>
-                    <div class="tab-pane fade" id="ejb">
-                        <p>Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
-                        </p>
                     </div>
                 </div>
             </div>
@@ -142,26 +120,35 @@
     <script>
         $(document).ready(function () {
         var this_;
+        var val1="";var val2="";var val3="";
             $(".inputs").change(function () {
                 this_="inputs";
                 var fil = this.files;
+                console.log(fil);
                 for (var i = 0; i < fil.length; i++) {
                     reads(fil[i]);
+                    val1 += fil[i].name + ";";
                 }
+                $(".factor-doc1").val(val1);
+
             });
             $(".inputs_two").change(function () {
             this_="inputs_two";
                 var fil = this.files;
                 for (var i = 0; i < fil.length; i++) {
                     reads(fil[i]);
+                    val2 += fil[i].name + ";";
                 }
+                $(".factor-doc2").val(val3);
             });
             $(".inputs_three").change(function () {
             this_="inputs_three";
                 var fil = this.files;
                 for (var i = 0; i < fil.length; i++) {
                     reads(fil[i]);
+                    val3 += fil[i].name + ";";
                 }
+                $(".factor-doc3").val(val3);
             });
 
         var innerImg=document.getElementById("desti");
@@ -219,8 +206,11 @@
             }
         })
         //文件提交
-        function file_submit(){
-            confirm("您确定要提交吗？")
+        function file_submit(Type){
+            var _confirm=confirm("您确定要提交吗？");
+            if(_confirm){
+                SE.addFactoryData(Type);
+            }
         }
     </script>
 </body>

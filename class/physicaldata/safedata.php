@@ -9,26 +9,68 @@
     <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/css/bootstrap-cerulean.min.css">
     <link rel="stylesheet" href="../../public/css/wx-app.css">
+    <link rel="stylesheet" href="../../public/css/webuploader.css">
     <link rel="stylesheet" href="../../external/uploadify/uploadify.css">
+    <script src="/js/project.js"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <style>
-        .form-group2{
+        .form-group2 {
             margin-bottom: 5px;
         }
-        .form-group2 label{
+
+        .form-group label,.form-group2 label {
             text-align: right;
             min-width: 85px;
             margin-right: 5px;
         }
-        .QP-img label{
+
+        .QP-img label {
             text-align: right;
             min-width: 85px;
             margin-right: 5px;
         }
-        .form-inline{
+
+        .form-inline {
             margin-bottom: 20px;
+        }
+        .log-ul,.log-detail{
+            float: left;
+            padding-left: 0;
+        }
+        .log-ul li{
+            list-style: none;
+            float: left;
+            margin-bottom: 0;
+            padding: 5px 10px;
+            min-width: 80px;
+            width: 80px;
+            text-align: center;
+            cursor: default;
+        }
+        .log-box{
+            float: left;
+            width: 100%;
+            display: block;
+        }
+        .log-active{
+            background: #8c8c8c;
+        }
+        .hide{
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+        .safe-log{
+            border-top: 1px solid #989191;
+        }
+        .log-detail{
+            height: 200px;
+            max-height: 200px;
+            overflow: auto;
+            width: 100%;
         }
     </style>
 </head>
@@ -53,96 +95,96 @@
             <form class="form-inline" role="form">
                 <div class="form-group">
                     <label for="firstname">Vin码</label>
-                    <input type="text" class="form-control vincode" id="vincode"
-                           placeholder="请输入Vin码(17位字母数字组合)" autocomplete="on">
+                    <input type="text" class="form-control VinCode" id="VinCode" placeholder="请输入Vin码(17位字母数字组合)" autocomplete="on" title="Vin码">
                 </div>
-                <div class="form-group">
-                    <button class="op-botton" type="button">检索</button>
+                <div class="form-group checkVinCode">
+                    <button class="op-botton btn btn-primary btn-sm" type="button" onclick="SE.checkVinCode();">检索</button>
+                </div>
+                <div class="check-info" style="display: none;margin-bottom: -10px;margin-top: 10px;margin-left: 40px;">
                 </div>
             </form>
             <div class="navbar navbar-default"><span class="navbar-brand">QP单</span></div>
-            <form class="form-inline" role="form">
-                <div class="form-group2">
+            <form class="form-inline QP-order" role="form">
+                <div class="commondata form-group2">
                     <label for="firstname">车型：</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入车型编号">
+                    <input type="text" class="form-control CarModels" id="" placeholder="请输入车型编号" attr="CarModels" title="车型">
                 </div>
-                <div class="form-group2">
+                <div class="commondata form-group2">
                     <label for="firstname">生产流水号：</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入生产流水号">
+                    <input type="text" class="form-control SerialNum" id="" placeholder="请输入生产流水号" attr="SerialNum" title="生产流水号">
                 </div>
-                <div class="form-group2">
+                <div class="commondata form-group2">
                     <label for="firstname">电机号：</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入电机号">
+                    <input type="text" class="form-control MotorNum" id="" placeholder="请输入电机号" attr="MotorNum" title="电机号">
                 </div>
-                <div class="form-group QP-img">
+                <div class="commondata form-group QP-img">
                     <label for="firstname">QP单(图)：</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请选择QP图片导入">
-                </div>
-                <div class="form-group">
-                    <span id="commercial_upload" class="uploadbutton"></span>
-<!--                    <input type="file" id="inputfile">-->
-                </div>
-                <div class="form-group" id="img_show">
-
+                    <input type="text" class="form-control ImgUrl" id="" placeholder="请选择QP图片导入" attr="ImgUrl" title="QP单(图)">
+                    <div id="uploadimg">
+                        <div id="fileList" class="uploader-list"></div>
+                        <div id="imgPicker">选择图片</div>
+                    </div>
                 </div>
                 <div class="form-group2">
-                    <button>提交</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="SE.safeDateAdd(0);">提交</button>
                 </div>
             </form>
             <div class="navbar navbar-default"><span class="navbar-brand">检测线数据</span></div>
-            <form class="form-inline" role="form">
-                <div class="form-group2">
+            <form class="form-inline line-data" role="form" >
+                <div class="commondata2 form-group2">
                     <label for="firstname">车型：</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入车型编号">
+                    <input type="text" class="form-control CarModels" id="" placeholder="请输入车型编号" attr="CarModels" title="车型">
                 </div>
-                <div class="form-group2">
+                <div class="commondata2 form-group2">
                     <label for="firstname">生产流水号：</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入生产流水号">
+                    <input type="text" class="form-control SerialNum" id="" placeholder="请输入生产流水号" attr="SerialNum" title="生产流水号">
                 </div>
-                <div class="form-group2">
+                <div class="commondata2 form-group2">
                     <label for="firstname">电机号：</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请输入电机号">
+                    <input type="text" class="form-control MotorNum" id="" placeholder="请输入电机号" attr="MotorNum" title="电机号">
                 </div>
-                <div class="form-group QP-img">
+                <div class="commondata2 form-group QP-img">
                     <label for="firstname">检测线数据：</label>
-                    <input type="text" class="form-control" id="firstname"
-                           placeholder="请选择检测线数据图片导入">
+                    <input type="text" class="form-control ImgUrl" id="" placeholder="请选择检测线数据图片导入" attr="ImgUrl" title="检测线数据">
                 </div>
-                <div class="form-group">
-                    <input type="file" id="inputfile">
-                </div>
+
                 <div class="form-group2">
-                    <button>提交</button>
+                    <button type="button" onclick="SE.safeDateAdd(1);" class="btn btn-primary btn-sm">提交</button>
                 </div>
             </form>
-            <div class="">
-                <ul>
-                    <li>录入日志</li>
-                    <li>错误</li>
-                </ul>
-            </div>
-            <div class="" role="">
-                <div class="">
-                    <label for="firstname">录入日志</label>
+            <div class="safe-log clearfix">
+                <div class="log-box">
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#log" data-toggle="tab">
+                                录入日志
+                            </a>
+                        </li>
+                        <li><a href="#err" data-toggle="tab">错误</a></li>
+                    </ul>
                 </div>
-                <div class="form-group">
-                    <label for="firstname">错误</label>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="log">
+                    </div>
+                    <div class="tab-pane fade" id="err">
+                    </div>
+                </div>
+                <div class="log-detail">
+                    <div class="success-log">
+                    </div>
+                    <div class="error-log" style="display: none">
+                    </div>
                 </div>
             </div>
+
 
         </div>
     </div>
 </div>
 <script src="../../public/js/jquery-1.11.1.min.js"></script>
 <script src="../../public/js/bootstrap.min.js"></script>
-<script src="../../external/uploadify/jquery.uploadify.js"></script>
+<script src="../../public/js/webuploader.js"></script>
+
 
 <script>
     $(document).ready(function () {
@@ -165,31 +207,96 @@
         };
     }
 
-    $(function(){
-        $(".uploadbutton").each(function(){
-            alert(999);
-            bidtype="上传";
-            $(this).uploadify({
-                swf: '../../external/uploadify/uploadify.swf',
-                uploader: "/ajax.php?act=uploadify",  //处理上传的php文件或者方法
-                multi: true,  //是否开启一次性上传多个文件
-                queueSizeLimit:20,  //最大允许上传的文件数量
-                buttonText: bidtype,        //按钮文字
-                height: 34,               //按钮高度
-                width: 82,               //按钮宽度
-                auto:false,  //选择完图片以后是否自动上传
-                method:'post',
-                fileTypeExts: "*.jpg;*.png;*.gif;*.jpeg;",      //允许的文件类型
-                fileTypeDesc: "请选择图片文件",      //文件说明
-                postData:{},
-                formData: { "imgType": "normal","timestamp":"asdfsa","token":"48f262516b3912a060d21ef6af564668" }, //提交给服务器端的参数
-                onUploadSuccess: function (file, data, response) {  //一个文件上传成功后的响应事件处理
-                    var data = $.parseJSON(data);
-                    $('#img_show').html('<img src="'+data+'" width="200" height="250"  />');
-                }
-            });
-        })
+    var uploader = WebUploader.create({
+        auto: false, // 选完文件后，是否自动上传
+        swf: 'js/Uploader.swf', // swf文件路径
+        server: '../ajax.php?act=uploadify', // 文件接收服务端
+        pick: '#imgPicker', // 选择文件的按钮。可选
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/*'
+        }
     });
+    uploader.on( 'fileQueued', function( file ) {
+        var $list = $("#fileList"),
+            $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail" style="display: inline-block;">' +
+                '<img>' +
+                '<div class="info">' + file.name + '</div>' +
+                '</div>'
+            ),
+            $img = $li.find('img');
+        // $list为容器jQuery实例
+        $list.append( $li );
+        // 创建缩略图
+        uploader.makeThumb( file, function( error, src ) {
+            if ( error ) {
+                $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
+
+            $img.attr( 'src', src );
+        }, 100, 100 ); //100x100为缩略图尺寸
+    });
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on( 'uploadProgress', function( file, percentage ) {
+        var $li = $( '#'+file.id ),
+            $percent = $li.find('.progress span');
+
+        // 避免重复创建
+        if ( !$percent.length ) {
+            $percent = $('<p class="progress"><span></span></p>')
+                .appendTo( $li )
+                .find('span');
+        }
+
+        $percent.css( 'width', percentage * 100 + '%' );
+    });
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploader.on( 'uploadSuccess', function( file, res ) {
+        console.log(res.filePath);//这里可以得到上传后的文件路径
+        $( '#'+file.id ).addClass('upload-state-done');
+    });
+
+    // 文件上传失败，显示上传出错。
+    uploader.on( 'uploadError', function( file ) {
+        var $li = $( '#'+file.id ),
+            $error = $li.find('div.error');
+
+        // 避免重复创建
+        if ( !$error.length ) {
+            $error = $('<div class="error"></div>').appendTo( $li );
+        }
+
+        $error.text('上传失败');
+    });
+
+    // 完成上传完了，成功或者失败，先删除进度条。
+    uploader.on( 'uploadComplete', function( file ) {
+        $( '#'+file.id ).find('.progress').remove();
+    });
+    uploader.on('fileDequeued', function(file){
+
+        fileCount--;
+        removeFile(file);
+
+    });
+    // 添加“添加文件”的按钮，
+    uploader.addButton({
+        id: '#imgPicker',
+        label: '继续上传'
+    });
+
+    //日志切换
+    $(".log-ul li").click(function () {
+        $(this).addClass("log-active");
+        $(this).siblings().removeClass("log-active");
+        var index=$(this).index();
+        $(".log-detail div").eq(index).show().siblings().hide();
+    })
 </script>
 </body>
 </html>

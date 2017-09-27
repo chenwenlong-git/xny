@@ -809,25 +809,25 @@ SE.authoreidt=function(){
 		var data_anal="";
 		var order="";
 		var VendID=$(".VendID").val();
-		var ReservedInfo=$(".ReservedInfo").val();		
+		var ReservedInfo=$(".ReservedInfo").val();
 		var PrivilLevel=$(".PrivilLevel option:selected").val();
-		var AuthoPerson=$(".AuthoPerson").val();	
+		var AuthoPerson=$(".AuthoPerson").val();
 		var Record=$(".Record").val();
-		var Id=$(".Id").val();	
-		
+		var Id=$(".Id").val();
+
 		var isprodect=$(".prodect").is(":checked");
 		if(isprodect) prodect=$(".prodect").attr("value");
-		
+
 		var isdata_anal=$(".data_anal").is(":checked");
 		if(isdata_anal) data_anal=$(".data_anal").attr("value");
-		
+
 		var isorder=$(".order").is(":checked");
 		if(isorder) order=$(".order").attr("value");
-		
+
 		var auth = prodect+data_anal+order;
-		
-		
-		
+
+
+
 		$.ajax({
 		type: 'POST',
 		url: "../ajax.php?act=authoreidt",
@@ -841,21 +841,135 @@ SE.authoreidt=function(){
 			AuthoPerson:AuthoPerson,
 			Record:Record,
 			Id:Id
-					
+
 		},
 		success: function(e) {
-				if(e.code==1){				
+				if(e.code==1){
 					alert(e.message);
 					window.location.href="vendauthor.php";
-				
+
 				}
 				else if(e.code==3){
-					alert(e.message);	
+					alert(e.message);
 				}
-				else{					
+				else{
 					alert(e.message);
 					 window.open('/customer.php','_top');
-				}		
+				}
 		}
-	});	
+	});
+}
+
+//录入安全数据
+SE.safeDateAdd=function(num){//num=0:QP单，num=1:检测线数据，
+	var id=[];
+	var val=[];
+    var title=[];
+	type=num;
+    var VinCode=$("#VinCode").val();
+    var VinCodeTitle=$("#VinCode").attr("title");
+    title.push(VinCodeTitle);
+    id.push("VinCode");
+    val.push(VinCode);
+	if(num==0){
+		var numName="QP单中";
+        $(".commondata >input").each(function () {
+            title.push($(this).attr("title"));
+            id.push($(this).attr("attr"));
+            val.push($(this).val());
+        })
+	}else{
+        var numName="检测线数据中";
+        $(".commondata >input").each(function () {
+            title.push($(this).attr("title"));
+            id.push($(this).attr("attr"));
+                val.push($(this).val());
+        })
+	}
+    // console.log(id);
+    // console.log(val);
+// return false;
+    $.ajax({
+        type: 'POST',
+        url: "/class/ajax.php?act=safeDateAdd",
+        dataType: 'json',
+        async:false,
+        data: {
+            type:type,
+            title:JSON.stringify(title),
+            tableName:JSON.stringify(id),
+            val:JSON.stringify(val)
+        },
+        success: function(e) {
+            if(e.code==1){
+                $("#log").append("<p style='color:green;'>"+e.message+"</p>");
+            } else{
+                $("#err").append("<p style='color:red;'>"+numName+e.message+"</p>");
+
+            }
+
+        }
+    });
+}
+//检索VIN码
+SE.checkVinCode=function(num){//num=0:QP单，num=1:检测线数据，
+    var VinCode=$("#VinCode").val();
+
+    $.ajax({
+        type: 'POST',
+        url: "/class/ajax.php?act=checkVinCode",
+        dataType: 'json',
+        async:false,
+        data: {
+            VinCode:VinCode
+        },
+        success: function(e) {
+        	$(".check-info").show();
+            if(e.code==1){
+                $(".check-info").html("<p style='color:green;'>"+e.message+"</p>");
+                $("#log").append("<p style='color:green;'>"+e.message+"</p>");
+            } else{
+                $(".check-info").html("<p style='color:red;'>"+e.message+"</p>");
+                $("#err").append("<p style='color:red;'>"+e.message+"</p>");
+
+            }
+
+        }
+    });
+}
+
+//录入出厂前数据
+SE.addFactoryData=function(type){//type=0:合同--技术协议，type=1:配置单，type=1:BOM单，
+
+    var OrderNum=$("#OrderNum").val();
+    if(type==0){
+        var Url=$("#ContractUrl").val();
+	}else if(type==1){
+        var Url=$("#ConfigUrl").val();
+	}else{
+        var Url=$("#BOMUrl").val();
+    }
+    // var ContractUrl=$("#ContractUrl").val();
+    // var ConfigUrl=$("#ConfigUrl").val();
+    // var BOMUrl=$("#BOMUrl").val();
+    $.ajax({
+        type: 'POST',
+        url: "/class/ajax.php?act=addFactoryData",
+        dataType: 'json',
+        async:false,
+        data: {
+            OrderNum:OrderNum,
+            Url:Url,
+            type:type
+        },
+        success: function(e) {
+            if(e.code==1){
+                $("#log").append("<p style='color:green;'>"+e.message+"</p>");
+            } else{
+                $("#err").append("<p style='color:red;'>"+e.message+"</p>");
+
+            }
+
+        }
+    });
 }
