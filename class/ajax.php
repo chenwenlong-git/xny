@@ -75,6 +75,69 @@ switch ($act) {
         }
         outData(2, "操作有误");
 
+    //录入性能数据
+    case "addPerforData":
+//        if (!isset($_SESSION['uName'])) outData(2, "你还没有权限");
+//        print_r($_POST);exit;
+        $arr = array();
+        if ($_POST) {
+            $VinCode= $_POST["VinCode"]?$_POST["VinCode"]:"";
+            if (!preg_match('/^(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{17}$/', $VinCode)) {
+                outData('2', 'Vin码请输入17位字母和数字的组合', 'VinCode');
+            }
+            $Url = $_POST["Url"]?$_POST["Url"]:"";
+            $type=$_POST["type"]?$_POST["type"]:"";
+            $name="";$fieldName="";
+            if($type==0){
+                $name="电池数据文件";
+                $fieldName="BatteryData";
+            }else if($type==1){
+                $name="电池数据截屏图片";
+                $fieldName="BatteryImgUrl";
+            }else if($type==2){
+                $name="系统数据文件";
+                $fieldName="SysData";
+            }else{
+                $name="系统数据截屏图片";
+                $fieldName="SysImgUrl";
+            }
+            if(!$VinCode){
+                outData(2, "VIN码不能为空");
+            }
+            if(!$Url){
+                outData(2, $name."文件为空,请选择文件导入！");
+            }
+
+            $arr["ModTime"] = date("Y-m-d H:i:s");
+            $arr[$fieldName]=$Url;
+            $temp = $db->find("select * from com_datasafe where VinCode='" . $VinCode . "'");
+            if($temp){//修改
+                if($temp[$fieldName]){
+                    outData(2, "该VIN码对应".$name."已存在，请修改");
+                }else{
+                    $relUpdate = $db->update("com_datasafe", $arr, "VinCode='".$VinCode."'");
+                    if($relUpdate){
+                        outData(1, $name."增加成功");
+                    }else{
+                        outData(2, $name."增加失败");
+                    }
+                }
+            }else{
+                $arr["VinCode"]=$VinCode;
+                $arr["RegTime"] = date("Y-m-d H:i:s");
+                $rel = $db->save("com_datasafe", $arr);
+                if ($rel) {
+                    if ($rel) outData(1, $name."增加成功");
+
+                } else {
+                    outData(2, $name."增加失败");
+
+                }
+            }
+            outData(2, "操作失败");
+        }
+        outData(2, "操作有误");
+
     //检索VIN码
     case "checkVinCode":
 //        if (!isset($_SESSION['uName'])) outData(2, "你还没有权限");

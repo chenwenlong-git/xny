@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/css/bootstrap-cerulean.min.css">
     <link rel="stylesheet" href="../../public/css/wx-app.css">
+    <link rel="stylesheet" href="../../public/css/wx-web.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/project.js"></script>
@@ -21,14 +22,6 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
 <!--     自动完成  -->
-    <style>
-        #myTabContent{
-            height: 200px;
-            max-height: 200px;
-            overflow: auto;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
 <?php require_once '../../public/header/header.php';?>
@@ -57,11 +50,9 @@
                     <div class="form-group">
                         <button type="button" onclick="SE.checkOrderNum();" class="op-botton btn btn-primary btn-sm">检索</button>
                     </div>
-                    <div class="check-info" style="display: none;margin-bottom: -40px;margin-top: 10px;margin-left: 40px;">
+                    <div class="check-info" style="display: none;margin-bottom: -10px;margin-top: 10px;margin-left: 92px;">
                     </div>
                 </form>
-                <br> <br>
-
                 <div class="navbar navbar-default"><span class="navbar-brand">合同--技术协议</span></div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
@@ -177,7 +168,7 @@
 
                 }
                 if(this_=="inputs_three"){
-                  innerImg_three.innerHTML+= "<div class='_imgs' style='width:80px;height:80px;text-align:center;position: relative'><button type='button' style='position:absolute;top 0px;right:0px'> &times;</button><img src='../../002.png' class='doubclic'></br><a style='padding-left:10px'>双击后打开</a></div>";
+                  innerImg_three.innerHTML+= "<div class='_imgs' style='width:80px;height:80px;text-align:center;position: relative'><button type='button' style='position:absolute;top 0px;right:0px'> &times;</button><img src='../../001.png' class='doubclic'></br><a style='padding-left:10px'>双击后打开</a></div>";
 
                 }
             };

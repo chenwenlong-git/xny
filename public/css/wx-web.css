@@ -1,0 +1,56 @@
+.form-group2 {
+    margin-bottom: 5px;
+}
+
+.form-group label,.form-group2 label {
+    text-align: right;
+    min-width: 85px;
+    margin-right: 5px;
+}
+
+.QP-img label {
+    text-align: right;
+    min-width: 85px;
+    margin-right: 5px;
+}
+
+.form-inline {
+    margin-bottom: 20px;
+}
+.log-ul,.log-detail{
+    float: left;
+    padding-left: 0;
+}
+.log-ul li{
+    list-style: none;
+    float: left;
+    margin-bottom: 0;
+    padding: 5px 10px;
+    min-width: 80px;
+    width: 80px;
+    text-align: center;
+    cursor: default;
+}
+.log-box{
+    float: left;
+    width: 100%;
+    display: block;
+}
+.log-active{
+    background: #8c8c8c;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+.safe-log{
+    border-top: 1px solid #989191;
+}
+#myTabContent{
+    height: 200px;
+    max-height: 200px;
+    overflow: auto;
+    width: 100%;
+}

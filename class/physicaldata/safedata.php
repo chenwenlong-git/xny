@@ -9,70 +9,14 @@
     <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/css/bootstrap-cerulean.min.css">
     <link rel="stylesheet" href="../../public/css/wx-app.css">
+    <link rel="stylesheet" href="../../public/css/wx-web.css">
     <link rel="stylesheet" href="../../public/css/webuploader.css">
     <link rel="stylesheet" href="../../external/uploadify/uploadify.css">
     <script src="/js/project.js"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <style>
-        .form-group2 {
-            margin-bottom: 5px;
-        }
 
-        .form-group label,.form-group2 label {
-            text-align: right;
-            min-width: 85px;
-            margin-right: 5px;
-        }
-
-        .QP-img label {
-            text-align: right;
-            min-width: 85px;
-            margin-right: 5px;
-        }
-
-        .form-inline {
-            margin-bottom: 20px;
-        }
-        .log-ul,.log-detail{
-            float: left;
-            padding-left: 0;
-        }
-        .log-ul li{
-            list-style: none;
-            float: left;
-            margin-bottom: 0;
-            padding: 5px 10px;
-            min-width: 80px;
-            width: 80px;
-            text-align: center;
-            cursor: default;
-        }
-        .log-box{
-            float: left;
-            width: 100%;
-            display: block;
-        }
-        .log-active{
-            background: #8c8c8c;
-        }
-        .hide{
-            display: none;
-        }
-        .show{
-            display: block;
-        }
-        .safe-log{
-            border-top: 1px solid #989191;
-        }
-        #myTabContent{
-            height: 200px;
-            max-height: 200px;
-            overflow: auto;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
 <?php require_once '../../public/header/header.php'; ?>
@@ -91,7 +35,6 @@
                 </ul>
             </div>
             <!-- 表单 -->
-            <h4>安全数据录入</h4>
             <form class="form-inline" role="form">
                 <div class="form-group">
                     <label for="firstname">Vin码</label>
@@ -100,7 +43,7 @@
                 <div class="form-group checkVinCode">
                     <button class="op-botton btn btn-primary btn-sm" type="button" onclick="SE.checkVinCode();">检索</button>
                 </div>
-                <div class="check-info" style="display: none;margin-bottom: -10px;margin-top: 10px;margin-left: 40px;">
+                <div class="check-info" style="display: none;margin-bottom: -10px;margin-top: 10px;margin-left: 92px;">
                 </div>
             </form>
             <div class="navbar navbar-default"><span class="navbar-brand">QP单</span></div>
