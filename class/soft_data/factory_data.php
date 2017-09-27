@@ -48,7 +48,9 @@
                            <input type="text" class="form-control OrderNum" id="OrderNum" placeholder="请输入订单号">
                     </div>
                     <div class="form-group">
-                        <button>检索</button>
+                        <button type="button" onclick="SE.checkOrderNum();">检索</button>
+                    </div>
+                    <div class="check-info" style="display: none;margin-bottom: -10px;margin-top: 10px;margin-left: 40px;">
                     </div>
                 </form>
                 <br> <br>
@@ -94,11 +96,11 @@
                 <!-- 录入日志和错误之间的切换 -->
                 <ul id="myTab" class="nav nav-tabs">
                     <li class="active">
-                        <a href="#log" data-toggle="tab">
+                        <a href="#log" data-toggle="tab" class="op-log">
                              录入日志
                         </a>
                     </li>
-                    <li><a href="#err" data-toggle="tab">错误</a></li>
+                    <li><a href="#err" data-toggle="tab" class="op-err">错误</a></li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="log">

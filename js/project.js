@@ -903,8 +903,10 @@ SE.safeDateAdd=function(num){//num=0:QP单，num=1:检测线数据，
         success: function(e) {
             if(e.code==1){
                 $("#log").append("<p style='color:green;'>"+e.message+"</p>");
+                $(".op-log").click();
             } else{
                 $("#err").append("<p style='color:red;'>"+numName+e.message+"</p>");
+                $(".op-err").click();
 
             }
 
@@ -914,7 +916,6 @@ SE.safeDateAdd=function(num){//num=0:QP单，num=1:检测线数据，
 //检索VIN码
 SE.checkVinCode=function(num){//num=0:QP单，num=1:检测线数据，
     var VinCode=$("#VinCode").val();
-
     $.ajax({
         type: 'POST',
         url: "/class/ajax.php?act=checkVinCode",
@@ -928,10 +929,11 @@ SE.checkVinCode=function(num){//num=0:QP单，num=1:检测线数据，
             if(e.code==1){
                 $(".check-info").html("<p style='color:green;'>"+e.message+"</p>");
                 $("#log").append("<p style='color:green;'>"+e.message+"</p>");
+                $(".op-log").click();
             } else{
                 $(".check-info").html("<p style='color:red;'>"+e.message+"</p>");
                 $("#err").append("<p style='color:red;'>"+e.message+"</p>");
-
+                $(".op-err").click();
             }
 
         }
@@ -965,9 +967,41 @@ SE.addFactoryData=function(type){//type=0:合同--技术协议，type=1:配置�
         success: function(e) {
             if(e.code==1){
                 $("#log").append("<p style='color:green;'>"+e.message+"</p>");
+				$(".op-log").click();
             } else{
                 $("#err").append("<p style='color:red;'>"+e.message+"</p>");
+                $(".op-err").click();
+            }
 
+        }
+    });
+}
+
+//检索订单号
+SE.checkOrderNum=function(num){//num=0:QP单，num=1:检测线数据，
+    var OrderNum=$("#OrderNum").val();
+    $.ajax({
+        type: 'POST',
+        url: "/class/ajax.php?act=checkOrderNum",
+        dataType: 'json',
+        async:false,
+        data: {
+            OrderNum:OrderNum
+        },
+        success: function(e) {
+            $(".check-info").show();
+            if(e.code==1){
+                $(".check-info").html("<p style='color:green;'>"+e.message+"</p>");
+                $("#log").append("<p style='color:green;'>"+e.message+"</p>");
+                $(".op-log").click();
+            } else if(e.code==3){
+                $(".check-info").html("<p style='color:#ff9800;'>"+e.message+"</p>");
+                $("#log").append("<p style='color:#ff9800;'>"+e.message+"</p>");
+                $(".op-log").click();
+            }else{
+                $(".check-info").html("<p style='color:red;'>"+e.message+"</p>");
+                $("#err").append("<p style='color:red;'>"+e.message+"</p>");
+                $(".op-err").click();
             }
 
         }

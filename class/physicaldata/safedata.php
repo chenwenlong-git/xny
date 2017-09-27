@@ -156,11 +156,11 @@
                 <div class="log-box">
                     <ul id="myTab" class="nav nav-tabs">
                         <li class="active">
-                            <a href="#log" data-toggle="tab">
+                            <a href="#log" data-toggle="tab" class="op-log">
                                 录入日志
                             </a>
                         </li>
-                        <li><a href="#err" data-toggle="tab">错误</a></li>
+                        <li><a href="#err" data-toggle="tab" class="op-err">错误</a></li>
                     </ul>
                 </div>
                 <div id="myTabContent" class="tab-content">
@@ -169,15 +169,7 @@
                     <div class="tab-pane fade" id="err">
                     </div>
                 </div>
-                <div class="log-detail">
-                    <div class="success-log">
-                    </div>
-                    <div class="error-log" style="display: none">
-                    </div>
-                </div>
             </div>
-
-
         </div>
     </div>
 </div>

@@ -54,14 +54,14 @@ switch ($act) {
             if (!preg_match('/^(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{17}$/', $arr["VinCode"])) {
                 outData('2', 'Vin码请输入17位字母和数字的组合', 'VinCode');
             }
-            $temp = $db->find("select * from com_datasafe where VinCode='" . $arr["VinCode"] . "'");
+            $type = isset($_POST["type"]) ? $_POST["type"] : 0;
+            $temp = $db->find("select * from com_datasafe where VinCode='" . $arr["VinCode"] . "' and Type='" . $type . "'");
             if($temp){
                 outData('2', 'Vin码已存在，请重新输入', 'VinCode');
             }
             $arr["RegTime"] = date("Y-m-d H:i:s");
             $arr["ModTime"] = date("Y-m-d H:i:s");
 //        print_r($arr);exit;
-            $type = isset($_POST["type"]) ? $_POST["type"] : 0;
             $arr["Type"] = $type;
             $rel = $db->save("com_datasafe", $arr);
             if ($type == 0) {
@@ -154,6 +154,39 @@ switch ($act) {
             outData(2, "操作失败");
         }
         outData(2, "操作有误");
+
+    //检索订单号
+    case "checkOrderNum":
+//        if (!isset($_SESSION['uName'])) outData(2, "你还没有权限");
+//        print_r($_POST);exit;
+        $arr = array();
+        if ($_POST["OrderNum"]) {
+//            if (!preg_match('/^(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{17}$/', $_POST["VinCode"])) {
+//                outData('2', 'Vin码请输入17位字母和数字的组合', 'VinCode');
+//            }
+            $temp = $db->find("select * from com_factorydata where OrderNum='" . $_POST["OrderNum"] . "'");
+            if($temp){
+                $resName="";
+                if($temp["ContractUrl"]&&$temp["ConfigUrl"]&&$temp["BOMUrl"]){
+                    outData('2', '该订单号已存在，请重新输入订单号！');
+                }else{
+                    if(!$temp["ContractUrl"]){
+                        $resName.="合同文档,";
+                    }
+                    if(!$temp["ConfigUrl"]){
+                        $resName.="配置单,";
+                    }
+                    if(!$temp["BOMUrl"]){
+                        $resName.="BOM单,";
+                    }
+                    outData('3', '该订单号已存在，其'.$resName.'未录入！');
+                }
+            }else{
+                outData('1', 'Vin码可用', 'VinCode');
+            }
+            outData(2, "操作失败");
+        }
+        outData(2, "请输入Vin码");
     default:
         return;
 }
