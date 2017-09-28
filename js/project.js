@@ -52,13 +52,27 @@ SE.addPerforData=function(type){//type=0:电池数据文件，type=1:电池数�
     var title=[];
     var VinCode=$("#VinCode").val();
     if(type==0){
-        var Url=$("#BatteryData").val();
+        var Url = new FormData();
+        var obj=$('#carinfo')[0].files[0];
+        Url.append('newcel',obj);
     }else if(type==1){
-        var Url=$("#BatteryImgUrl").val();
+        var iv=0;
+        var imgarr = [];
+        $("#ul_pics li").each(function(i){
+            imgarr[iv]=$(this).children("div").children("img").attr("src");
+            iv++;
+        });
+        var Url=JSON.stringify(imgarr);
     }else if(type==2){
         var Url=$("#SysData").val();
     }else{
-        var Url=$("#SysImgUrl").val();
+        var iv=0;
+        var imgarr = [];
+        $("#ul_pics2 li").each(function(i){
+            imgarr[iv]=$(this).children("div").children("img").attr("src");
+            iv++;
+        });
+        var Url=JSON.stringify(imgarr);
     }
     $.ajax({
         type: 'POST',
@@ -82,6 +96,41 @@ SE.addPerforData=function(type){//type=0:电池数据文件，type=1:电池数�
 
         }
     });
+}
+
+//录入性能EXCEL数据
+SE.perforExcel = function (type) {
+    var VinCode=$("#VinCode").val();
+    var formData = new FormData();
+    if(type==0){
+        var obj=$('.inputs')[0].files[0];
+    }else{
+        var obj=$('.inputs_three')[0].files[0];
+    }
+    formData.append('type',type);
+    formData.append('VinCode',VinCode);
+    formData.append('newcel',obj);
+    $.ajax({
+        url: "../ajax.php?act=perforExcel",
+        type: 'POST',
+        cache: false,
+        data:formData,
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        success: function(e){
+            var time=new Date().toLocaleString(); //获取当前时间
+            if(e.code==1){
+                $("#log").prepend("<p style='color:green;'>"+e.message+"  "+time+"</p>");
+                $(".op-log").click();
+            } else{
+                $("#err").prepend("<p style='color:red;'>"+e.message+"  "+time+"</p>");
+                $(".op-err").click();
+            }
+        }
+    })
+
+
 }
 //检索VIN码
 SE.checkVinCode=function(num){//num=0:QP单，num=1:检测线数据，
