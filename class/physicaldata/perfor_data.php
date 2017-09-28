@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../public/css/wx-app.css">
     <link rel="stylesheet" href="../../public/css/wx-web.css">
     <script src="/js/project.js"></script>
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- /*    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>*/ -->
 <!--     <link rel="stylesheet" href="public/css/autocomplete.css">
 <link rel="stylesheet" href="style.css"> -->
             <!--[if lt IE 9]>
@@ -233,6 +233,6 @@
             }
         }
     </script>
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap.min.js"></script>
 </body>
 </html>
