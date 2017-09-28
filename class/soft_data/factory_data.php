@@ -57,15 +57,16 @@
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">合同文档</label>
-                           <input type="text" class="form-control factor-doc1 ContractUrl" id="ContractUrl"
-                           placeholder="请选择合同文档文件导入">
+                           <div id="demo">
+	                          <div id="as" ></div>
+                            </div>
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs" multiple="multiple" accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" >
                     </div>
                 </form>
-                <div id='desti' style="display:flex;flex-direction: row"><iframe id="iframe1" src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
-                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(0)">提交</button> <br><br>
+                <div id='desti' style="display:flex;flex-direction: row"></div>
+                <!--<button type="button" class="btn btn-primary btn-sm" onclick="file_submit(0)">提交</button>-->
 
                 <div class="navbar navbar-default"><span class="navbar-brand">配置单</span></div>
                 <form class="form-inline" role="form">
@@ -78,7 +79,7 @@
                     </div>
                 </form>
                 <div id='desti_two' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
-                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(1)">提交</button> <br><br>
+                <!-- <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(1)">提交</button>--> 
                 <div class="navbar navbar-default"><span class="navbar-brand">BOM单</span></div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
