@@ -4,11 +4,11 @@
                         <li class="nav-header">首页</li>
                         <li class="nav-header">系统管理</li>
                         <li class="accordion">
-                            <a href="#person" data-toggle="collapse">
+                            <a href="#">
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>人员权限</span>
                             </a>
-                            <ul class="nav nav-pills nav-stacked collapse" id="person">
+                            <ul class="nav nav-pills nav-stacked">
                                 <li>
                                     <a href="#">用户资料</a>
                                 </li>

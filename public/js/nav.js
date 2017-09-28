@@ -112,6 +112,7 @@ $(document).ready(function () {
     });
 
     $('.accordion > a').click(function (e) {
+        alert("点击");
         e.preventDefault();
         var $ul = $(this).siblings('ul');
         var $li = $(this).parent();
