@@ -14,11 +14,10 @@ SE.safeDateAdd=function(num){//num=0:QP单，num=1:检测线数据，
     var SerialNum=$("#SerialNum").val();
     var MotorNum=$("#MotorNum").val();
 	if(num==0){
-		var url="";
+		var url=$("#qpurl").val();
 	}else{
-        var url="";
+        var url=$("#jcxurl").val();
 	}
-
     $.ajax({
         type: 'POST',
         url: "/class/ajax.php?act=safeDateAdd",
@@ -26,21 +25,22 @@ SE.safeDateAdd=function(num){//num=0:QP单，num=1:检测线数据，
         async:false,
         data: {
             type:type,
-            title:JSON.stringify(title),
-            tableName:JSON.stringify(id),
-            val:JSON.stringify(val)
+            VinCode:VinCode,
+            CarModels:CarModels,
+            SerialNum:SerialNum,
+            MotorNum:MotorNum,
+            url:url
         },
         success: function(e) {
             var time=new Date().toLocaleString(); //获取当前时间
-            // var time=new Date().toLocaleString(); //获取当前时间
             if(e.code==1){
-                $("#log").append("<p style='color:green;'>"+e.message+"  "+"  "+time+"</p>");
+                $("#log").prepend("<p style='color:green;'>"+e.message+"  "+time+"</p>");
                 $(".op-log").click();
             } else{
-                $("#err").append("<p style='color:red;'>"+numName+e.message+"  "+"  "+time+"</p>");
+                $("#err").prepend("<p style='color:red;'>"+e.message+"  "+time+"</p>");
                 $(".op-err").click();
-
             }
+
 
         }
     });
