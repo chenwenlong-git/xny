@@ -51,7 +51,7 @@
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">电池数据文件</label>
-                           <input type="text" class="form-control factor-doc1 BatteryData" id="BatteryData" placeholder="请输入文档">
+                           <input type="text" class="form-control factor-doc1 BatteryData" id="BatteryData" placeholder="请选择电池数据文件导入">
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs" multiple="multiple">
@@ -63,7 +63,7 @@
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">截屏图片</label>
-                           <input type="text" class="form-control factor-doc2 BatteryImgUrl" id="BatteryImgUrl" placeholder="请输入">
+                           <input type="text" class="form-control factor-doc2 BatteryImgUrl" id="BatteryImgUrl" placeholder="请选择电池数据截屏图片导入">
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs_two" multiple="multiple">
@@ -76,7 +76,7 @@
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">系统数据文件</label>
-                           <input type="text" class="form-control factor-doc3 SysData" id="SysData" placeholder="请输入订单号">
+                           <input type="text" class="form-control factor-doc3 SysData" id="SysData" placeholder="请选择系统数据文件导入">
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs_three" multiple="multiple">
@@ -89,7 +89,7 @@
                     <div class="form-group">
                         <label for="firstname">截屏图片</label>
                            <input type="text" class="form-control SysImgUrl factor-doc4" id="SysImgUrl"
-                           placeholder="请输入">
+                           placeholder="请选择系统数据截屏图片导入">
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs_four" multiple="multiple">

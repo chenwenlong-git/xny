@@ -58,20 +58,20 @@
                     <div class="form-group">
                         <label for="firstname">合同文档</label>
                            <input type="text" class="form-control factor-doc1 ContractUrl" id="ContractUrl"
-                           placeholder="请输入文档">
+                           placeholder="请选择合同文档文件导入">
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs" multiple="multiple" accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" >
                     </div>
                 </form>
-                <div id='desti' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
+                <div id='desti' style="display:flex;flex-direction: row"><iframe id="iframe1" src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
                 <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(0)">提交</button> <br><br>
 
                 <div class="navbar navbar-default"><span class="navbar-brand">配置单</span></div>
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">配置单</label>
-                           <input type="text" class="form-control factor-doc2 ConfigUrl" id="ConfigUrl" placeholder="请输入订单号">
+                           <input type="text" class="form-control factor-doc2 ConfigUrl" id="ConfigUrl" placeholder="请选择配置单文件导入">
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs_two" multiple="multiple" accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" >
@@ -83,7 +83,7 @@
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">BOM单</label>
-                           <input type="text" class="form-control factor-doc3 BOMUrl" id="BOMUrl" placeholder="请输入订单号">
+                           <input type="text" class="form-control factor-doc3 BOMUrl" id="BOMUrl" placeholder="请选择BOM单文件导入">
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs_three" multiple="multiple">
@@ -124,13 +124,35 @@
             $(".inputs").change(function () {
                 this_="inputs";
                 var fil = this.files;
-                console.log(fil);
                 for (var i = 0; i < fil.length; i++) {
                     reads(fil[i]);
                     val1 += fil[i].name + ";";
                 }
-                $(".factor-doc1").val(val1);
-
+                var fd = new FormData();
+                fd.append("file", $(this)[0].files[0]);
+                $.ajax({
+                    url: "../ajax.php?act=importWord",
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    data: fd,
+                    success: function(e) {
+                        $(".factor-doc1").val(e.data);
+                        console.log(e);
+                        var time=new Date().toLocaleString(); //获取当前时间
+//                        https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1
+//                        var url="https://view.officeapps.live.com/op/view.aspx?src=../../uploads/file/"+e.data;
+//                        $("#iframe1").attr("src",url);
+                        if(e.code==1){
+                            $("#log").prepend("<p style='color:green;'>"+e.message+"  "+time+"</p>");
+                            $(".op-log").click();
+                        } else{
+                            $("#err").prepend("<p style='color:red;'>"+e.message+"  "+time+"</p>");
+                            $(".op-err").click();
+                        }
+                    }
+                });
             });
             $(".inputs_two").change(function () {
             this_="inputs_two";
