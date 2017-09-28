@@ -38,7 +38,6 @@
                     </div>
                     <div class="form-group">
                         <input type="file" id="inputs" multiple="multiple">
-                                              
                     </div>
                 </form>
                 <div id='desti' ><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' frameborder='0'></iframe></div>

@@ -45,9 +45,6 @@
                 </div>
                 <div class="check-info" style="display: none;margin-bottom: -10px;margin-top: 10px;margin-left: 92px;">
                 </div>
-            </form>
-            <div class="navbar navbar-default"><span class="navbar-brand">QP单</span></div>
-            <form class="form-inline QP-order" role="form">
                 <div class="commondata form-group2">
                     <label for="firstname">车型：</label>
                     <input type="text" class="form-control CarModels" id="" placeholder="请输入车型编号" attr="CarModels" title="车型">
@@ -60,9 +57,13 @@
                     <label for="firstname">电机号：</label>
                     <input type="text" class="form-control MotorNum" id="" placeholder="请输入电机号" attr="MotorNum" title="电机号">
                 </div>
+            </form>
+            <div class="navbar navbar-default"><span class="navbar-brand">QP单</span></div>
+            <form class="form-inline QP-order" role="form">
+
                 <div class="commondata form-group QP-img">
                     <label for="firstname">QP单(图)：</label>
-                    <input type="text" class="form-control ImgUrl inputs_0" id="" placeholder="请选择QP单图片导入" attr="ImgUrl" title="QP单(图)" readonly="readonly">
+                    <input type="text" class="form-control ImgUrl inputs_0" id="qpyrl" placeholder="请选择QP单图片导入" attr="ImgUrl" title="QP单(图)" readonly="readonly">
                     <div id="uploadimg">
                         <div id="fileList" class="uploader-list"></div>
                         <div id="imgPicker">选择图片</div>
@@ -74,21 +75,9 @@
             </form>
             <div class="navbar navbar-default"><span class="navbar-brand">检测线数据</span></div>
             <form class="form-inline line-data" role="form">
-                <div class="commondata2 form-group2">
-                    <label for="firstname">车型：</label>
-                    <input type="text" class="form-control CarModels" id="" placeholder="请输入车型编号" attr="CarModels" title="车型">
-                </div>
-                <div class="commondata2 form-group2">
-                    <label for="firstname">生产流水号：</label>
-                    <input type="text" class="form-control SerialNum" id="" placeholder="请输入生产流水号" attr="SerialNum" title="生产流水号">
-                </div>
-                <div class="commondata2 form-group2">
-                    <label for="firstname">电机号：</label>
-                    <input type="text" class="form-control MotorNum" id="" placeholder="请输入电机号" attr="MotorNum" title="电机号">
-                </div>
                 <div class="commondata2 form-group QP-img">
                     <label for="firstname">检测线数据：</label>
-                    <input type="text" class="form-control ImgUrl inputs_1" id="" placeholder="请选择检测线数据图片导入" attr="ImgUrl" title="检测线数据" readonly="readonly">
+                    <input type="text" class="form-control ImgUrl inputs_1" id="jcxurl" placeholder="请选择检测线数据图片导入" attr="ImgUrl" title="检测线数据" readonly="readonly">
                     <div id="uploadimg">
                         <div id="fileList2" class="uploader-list2"></div>
                         <div id="imgPicker2">选择图片</div>
