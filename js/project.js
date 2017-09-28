@@ -10,28 +10,15 @@ SE.safeDateAdd=function(num){//num=0:QP单，num=1:检测线数据，
     var title=[];
 	type=num;
     var VinCode=$("#VinCode").val();
-    var VinCodeTitle=$("#VinCode").attr("title");
-    title.push(VinCodeTitle);
-    id.push("VinCode");
-    val.push(VinCode);
+    var CarModels=$("#CarModels").val();
+    var SerialNum=$("#SerialNum").val();
+    var MotorNum=$("#MotorNum").val();
 	if(num==0){
-		var numName="QP单中";
-        $(".commondata >input").each(function () {
-            title.push($(this).attr("title"));
-            id.push($(this).attr("attr"));
-            val.push($(this).val());
-        })
+		var url="";
 	}else{
-        var numName="检测线数据中";
-        $(".commondata >input").each(function () {
-            title.push($(this).attr("title"));
-            id.push($(this).attr("attr"));
-                val.push($(this).val());
-        })
+        var url="";
 	}
-    // console.log(id);
-    // console.log(val);
-// return false;
+
     $.ajax({
         type: 'POST',
         url: "/class/ajax.php?act=safeDateAdd",
