@@ -58,7 +58,8 @@
         }
         var thisS = this;
         var $input = $chooseBtn.find(".ssi-uploadInput");
-        $chooseBtn.find('button').click(function () {
+        $chooseBtn.find('button').click(function (event) {
+            event.preventDefault();
             $input.trigger('click');
         });
 
