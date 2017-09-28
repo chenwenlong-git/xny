@@ -135,7 +135,7 @@ switch ($act) {
                 $fileName=time().".".$fileName[1];
                 if(move_uploaded_file($tempName, "../uploads/file/".$fileName)){
                     $data[0]=$fileName;
-                    print_r(__FILE__($fileName));exit;
+//                    print_r(__FILE__($fileName));exit;
                     outData(1, "上传文件成功","$fileName");
                 }else{
                     outData(2, "上传文件失败");
