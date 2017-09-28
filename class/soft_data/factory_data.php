@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="../../public/css/bootstrap-cerulean.min.css">
     <link rel="stylesheet" href="../../public/css/wx-app.css">
     <link rel="stylesheet" href="../../public/css/wx-web.css">
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../public/js/jquery-1.11.1.min.js"></script>
+    <script src="../../public/js/bootstrap.min.js"></script>
     <script src="/js/project.js"></script>
     <!--     <link rel="stylesheet" href="public/css/autocomplete.css">
     <link rel="stylesheet" href="style.css"> -->
