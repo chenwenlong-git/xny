@@ -14,9 +14,22 @@
     <link rel="stylesheet" href="../../public/css/wx-app.css">
     <link rel="stylesheet" href="../../public/css/wx-web.css">
     <script src="/js/project.js"></script>
-<!-- /*    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>*/ -->
-<!--     <link rel="stylesheet" href="public/css/autocomplete.css">
-<link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 文件上传 -->
+    <link rel="stylesheet" href="../../public/css/zyUpload.css">
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="../../public/js/zyFile.js"></script>
+    <script type="text/javascript" src="../../public/js/zyUpload.js"></script>
+    <script type="text/javascript" src="../../public/js/jqueryrotate.js"></script>
+    <script type="text/javascript" src="../../public/js/index.js"></script>
+
+    <link rel="stylesheet" href="../../public/css/ssi-uploader.css"/>
+    <script src="../../public/js/ssi-uploader.js"></script>
+<!-- <link rel="stylesheet" href="../../public/css/zyupload-1.0.0.min.css">
+<script src="../../public/js/zyupload-1.0.0.min.js"></script> -->
+    
+
+
             <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
@@ -24,11 +37,17 @@
 
 </head>
 <body>
+                
 <?php require_once '../../public/header/header.php';?>
 
     <div class="ch-container">
         <div class="row">
             <?php require_once '../../public/nav/nav.php';?>
+                
+
+
+
+
             <div id="content" class="col-sm-10 col-lg-10">
                 <div>
                     <ul class="breadcrumb">
@@ -66,8 +85,11 @@
                            <input type="text" class="form-control factor-doc2 BatteryImgUrl" id="BatteryImgUrl" placeholder="请输入">
                     </div>
                     <div class="form-group">
-                        <input type="file" class="inputs_two" multiple="multiple">
+                        
+<!--                         <input type="file"  multiple="multiple" class="inputs_two"> -->
+                        <div class="filePicker" class="inputs_two">点击选择文件</div>
                     </div>
+                    <div id="demo" class="demo"></div>
                 </form>
                 <div id='desti_two' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
                 <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(1)">提交</button> <br><br>
@@ -88,12 +110,15 @@
                 <form class="form-inline" role="form">
                     <div class="form-group">
                         <label for="firstname">截屏图片</label>
-                           <input type="text" class="form-control SysImgUrl factor-doc4" id="SysImgUrl"
-                           placeholder="请输入">
+                        <input type="file" multiple id="ssi-upload"/>
+                           <!-- <input type="text" class="form-control factor-doc4 SysImgUrl" id="SysImgUrl" placeholder="请输入"> -->
+<!--                            <input type="text" class="form-control SysImgUrl factor-doc4" id="SysImgUrl"
+placeholder="请输入"> -->
                     </div>
                     <div class="form-group">
                         <input type="file" class="inputs_four" multiple="multiple">
                     </div>
+                    <div id="zyupload" class="zyupload"></div>  
                 </form>
                 <div id='desti_four' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
                 <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(3)">提交</button> <br><br>
@@ -119,12 +144,8 @@
         </div>
     </div>
 
-/*<!--     <script src="public/js/bootstrap.min.js"></script>
-    <script src="public/js/jquery-1.11.1.min.js"></script> -->*/
-<!--     <script src="public/js/wx.js"></script> -->
-    <script>
-
-    </script>
+<script src="../../public/js/bootstrap.min.js"></script>
+<script src="../../public/js/webuploader.js"></script>
     <script>
         $(document).ready(function () {
         var this_;
@@ -233,6 +254,10 @@
             }
         }
     </script>
+<!--     上传系统文件图片 -->
+<script type="text/javascript">
+    $('#ssi-upload').ssi_uploader({url:'#',maxFileSize:6,allowed:['jpg','gif','txt','png','pdf']});
+</script>
     <script src="../../bootstrap.min.js"></script>
 </body>
 </html>

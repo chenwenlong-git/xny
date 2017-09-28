@@ -48,7 +48,7 @@
                                 <span>软件数据</span>
                             </a>
                             <ul class="nav nav-pills nav-stacked" style="display:block">
-                                <li class="active">
+                                <li>
                                     <a href="../../class/soft_data/factory_data.php">出厂前数据</a>
                                 </li>
                             </ul>
