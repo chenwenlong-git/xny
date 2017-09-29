@@ -16,39 +16,6 @@
     <link rel="stylesheet" type="text/css" href="../../external/uploadimg/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="../../external/uploadimg/css/style.css"/>
     <script src="/js/project.js"></script>
-<<<<<<< HEAD
-    <link rel="stylesheet" href="style.css">
-    <!-- 文件上传 -->
-    <link rel="stylesheet" href="../../public/css/zyUpload.css">
-    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="../../public/js/zyFile.js"></script>
-    <script type="text/javascript" src="../../public/js/zyUpload.js"></script>
-    <script type="text/javascript" src="../../public/js/jqueryrotate.js"></script>
-    <script type="text/javascript" src="../../public/js/index.js"></script>
-
-    <link rel="stylesheet" href="../../public/css/ssi-uploader.css"/>
-    <script src="../../public/js/ssi-uploader.js"></script>
-<!--     上传exel等文件 -->
-    <link rel="stylesheet" href="../../public/css/iconfont.css">
-    <link href="../../public/css/fileUpload.css" rel="stylesheet" type="text/css">
-    <link href="../../public/css/iconfont.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="../../public/js/fileUpload.js"></script>
-    <script type="text/javascript" src="../../public/js/iconfont.js"></script>
-<!-- <link rel="stylesheet" href="../../public/css/zyupload-1.0.0.min.css">
-<script src="../../public/js/zyupload-1.0.0.min.js"></script> -->
-    
-
-
-            <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-            <![endif]-->
-<!--     自动完成  -->
-<style>
-    .demo{
-        width:100% !important;
-    }
-</style>
-=======
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <!--     <link rel="stylesheet" href="public/css/autocomplete.css">
     <link rel="stylesheet" href="style.css"> -->
@@ -57,7 +24,6 @@
     <![endif]-->
     <!--     自动完成  -->
 
->>>>>>> 6cee611e5ac692c7485747837d6a4cb1f76e7c0a
 </head>
 <body>
 <?php require_once '../../public/header/header.php'; ?>
@@ -124,76 +90,6 @@
                 <div class="form-group">
                     <input type="file" class="inputs_three" multiple="multiple">
                 </div>
-<<<<<<< HEAD
-                <!-- 表单 -->
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <label for="firstname">VIN码</label>
-                           <input type="text" class="form-control" id="VinCode" placeholder="请输入Vin码(17位字母数字组合)" autocomplete="on" title="Vin码">
-                    </div>
-                </form>
-                <div class="navbar navbar-default"><span class="navbar-brand">电池数据</span></div>
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <label for="firstname">电池数据文件</label>
-                        <input type="text" class="form-control factor-doc1 BatteryData" id="BatteryData" placeholder="请输入文档">
-                                    
-                    </div>
-                    <div class="form-group">
-                        
-                        <input type="file" class="inputs" multiple="multiple">
-                    </div>
-                    <button >标准模板文件导出</button>
-                        
-                </form>
-                <div id="fileUploadContent" class="fileUploadContent"></div>
-                <div id='desti' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
-                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(0)">提交</button> <br><br>
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <label for="firstname">截屏图片</label>
-                           <input type="text" class="form-control factor-doc2 BatteryImgUrl" id="BatteryImgUrl" placeholder="请输入">
-                    </div>
-                    <div class="form-group">
-                        
-<!--                         <input type="file"  multiple="multiple" class="inputs_two"> -->
-                        <div class="filePicker" class="inputs_two">点击选择文件</div>
-                    </div>
-                    <div id="demo" class="demo" style="width:100% !important"></div>
-                </form>
-                <div id='desti_two' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
-                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(1)">提交</button> <br><br>
-<!-- 系统数据 -->
-                <div class="navbar navbar-default"><span class="navbar-brand">系统数据</span></div>
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <label for="firstname">系统数据文件</label>
-                           <input type="text" class="form-control factor-doc3 SysData" id="SysData" placeholder="请输入订单号">
-                    </div>
-                    <div class="form-group">
-                        <input type="file" class="inputs_three" multiple="multiple">
-                    </div>
-                    <button >标准模板文件导出</button>
-                </form>
-                <div id='desti_three' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
-                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(2)">提交</button> <br><br>
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <label for="firstname">截屏图片</label>
-                        
-                           <!-- <input type="text" class="form-control factor-doc4 SysImgUrl" id="SysImgUrl" placeholder="请输入"> -->
-<!--                            <input type="text" class="form-control SysImgUrl factor-doc4" id="SysImgUrl"
-placeholder="请输入"> -->
-                    </div>
-                    <div class="form-group">
-                        <input type="file" class="inputs_four" multiple="multiple">
-                    </div>                    
-                </form>
-                <input type="file" multiple id="ssi-upload"/>
-                <div id="zyupload" class="zyupload"></div>  
-                <div id='desti_four' style="display:flex;flex-direction: row"><iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://wat.eworder.com/a.docx&wdStartOn=1' width='1200px' height='588px' style="display: none" frameborder='0'></iframe></div>
-                <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(3)">提交</button> <br><br>
-=======
                 <button>标准模板文件导出</button>
             </form>
             <div id='desti_three' style="display:flex;flex-direction: row">
@@ -213,7 +109,6 @@ placeholder="请输入"> -->
 
             <button type="button" class="btn btn-primary btn-sm" onclick="file_submit(3)">提交</button>
             <br><br>
->>>>>>> 6cee611e5ac692c7485747837d6a4cb1f76e7c0a
 
             <!-- 录入日志和错误之间的切换 -->
             <ul id="myTab" class="nav nav-tabs">
@@ -428,30 +323,6 @@ placeholder="请输入"> -->
         if (_close) {
             $(this).parent().remove();
         }
-<<<<<<< HEAD
-    </script>
-<!--     上传系统文件图片 -->
-<script type="text/javascript">
-    $('#ssi-upload').ssi_uploader({url:'#',maxFileSize:6,allowed:['jpg','gif','txt','png','pdf']});
-    //上传excel等文件
-    $("#fileUploadContent").initUpload({
-        "uploadUrl":"http://***/",//上传文件信息地址
-        //"size":350,//文件大小限制，单位kb,默认不限制
-        //"maxFileNumber":3,//文件个数限制，为整数
-        //"filelSavePath":"",//文件上传地址，后台设置的根目录
-        "beforeUpload":beforeUploadFun,//在上传前执行的函数
-        //"onUpload":onUploadFun，//在上传后执行的函数
-        //autoCommit:true,//文件是否自动上传
-        "fileType":['xls','xlsx','docx','doc']//文件类型限制，默认不限制，注意写的是文件后缀
-    });
-    function beforeUploadFun(opt){
-        opt.otherData =[{"name":"name","value":"zxm"}];
-    }
-    function onUploadFun(opt,data){
-        alert(data);
-        uploadTools.uploadError(opt);//显示上传错误
-    }
-=======
     })
     $("#desti_three").on("dblclick", "div", function () {
         $("iframe").css("display", "block");
@@ -478,7 +349,6 @@ placeholder="请输入"> -->
         var index = $(this).index();
         $(".log-detail div").eq(index).show().siblings().hide();
     })
->>>>>>> 6cee611e5ac692c7485747837d6a4cb1f76e7c0a
 </script>
 <script src="../../bootstrap.min.js"></script>
 </body>
