@@ -181,6 +181,9 @@ switch ($act) {
                 outData(2, "请输入电机号");
             }
             $arr[$fieldName]=$url;
+            $arr["CarModels"]=$CarModels;
+            $arr["SerialNum"]=$SerialNum;
+            $arr["MotorNum"]=$MotorNum;
             $temp = $db->find("select * from com_datasafe where VinCode='" . $_POST["VinCode"] . "'");
             if($temp){
                 $arr["ModTime"] = date("Y-m-d H:i:s");
@@ -199,9 +202,7 @@ switch ($act) {
                 $arr["RegTime"] = date("Y-m-d H:i:s");
                 $arr["ModTime"] = date("Y-m-d H:i:s");
                 $arr["VinCode"]=$VinCode;
-                $arr["CarModels"]=$CarModels;
-                $arr["SerialNum"]=$SerialNum;
-                $arr["MotorNum"]=$MotorNum;
+
                 $rel = $db->save("com_datasafe", $arr);
                 if ($rel) outData(1, $name."增加成功");
                 outData(2, $name."增加失败");
