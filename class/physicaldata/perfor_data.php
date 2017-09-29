@@ -56,7 +56,7 @@
                     <!--                    <input type="text" class="form-control factor-doc1 BatteryData" id="BatteryData" placeholder="请选择电池数据文件导入">-->
                 </div>
                 <div class="form-group">
-                    <input type="file" class="inputs" multiple="multiple">
+                    <input type="file" class="inputs" multiple="multiple" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                 </div>
                 <button>标准模板文件导出</button>
             </form>
@@ -88,7 +88,7 @@
                     <!--                    <input type="text" class="form-control factor-doc3 SysData" id="SysData" placeholder="请选择系统数据文件导入">-->
                 </div>
                 <div class="form-group">
-                    <input type="file" class="inputs_three" multiple="multiple">
+                    <input type="file" class="inputs_three" multiple="multiple" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                 </div>
                 <button>标准模板文件导出</button>
             </form>
@@ -232,77 +232,6 @@
     uploader2.init();
 </script>
 <script>
-    //    $(document).ready(function () {
-    //        var this_;
-    //        var val1 = "";
-    //        var val2 = "";
-    //        var val3 = "";
-    //        var val4 = "";
-    //        $(".inputs").change(function () {
-    //            this_ = "inputs";
-    //            var fil = this.files;
-    //            for (var i = 0; i < fil.length; i++) {
-    //                reads(fil[i]);
-    //                val1 += fil[i].name + ";";
-    //            }
-    //            $(".factor-doc1").val(val1);
-
-    //        });
-    //        $(".inputs_two").change(function () {
-    //            this_ = "inputs_two";
-    //            var fil = this.files;
-    //            for (var i = 0; i < fil.length; i++) {
-    //                reads(fil[i]);
-    //                val2 += fil[i].name + ";";
-    //            }
-    //            $(".factor-doc2").val(val2);
-    //        });
-    //        $(".inputs_three").change(function () {
-    //            this_ = "inputs_three";
-    //            var fil = this.files;
-    //            for (var i = 0; i < fil.length; i++) {
-    //                reads(fil[i]);
-    //                val3 += fil[i].name + ";";
-    //            }
-    //            $(".factor-doc3").val(val3);
-    //        });
-    //        $(".inputs_four").change(function () {
-    //            this_ = "inputs_four";
-    //            var fil = this.files;
-    //            for (var i = 0; i < fil.length; i++) {
-    //                reads(fil[i]);
-    //                val4 += fil[i].name + ";";
-    //            }
-    //            $(".factor-doc4").val(val4);
-    //        });
-    //
-    //        var innerImg = document.getElementById("desti");
-    //        var innerImg_two = document.getElementById("desti_two");
-    //        var innerImg_three = document.getElementById("desti_three");
-    //        var innerImg_four = document.getElementById("desti_four");
-    //
-    //        function reads(fil) {
-    //            var reader = new FileReader();
-    //            reader.readAsDataURL(fil);
-    //            reader.onload = function () {
-    //                if (this_ == "inputs") {
-    //                    innerImg.innerHTML += "<div class='_imgs' style='width:80px;height:80px;text-align:center;position: relative'><button type='button' style='position:absolute;top 0px;right:0px'> &times;</button><img src='../../001.png' class='doubclic'></br><a style='padding-left:10px'>双击后打开</a></div>";
-    //                }
-    //                if (this_ == "inputs_two") {
-    //                    innerImg_two.innerHTML += "<div class='_imgs' style='width:80px;height:80px;text-align:center;position: relative'><button type='button' style='position:absolute;top 0px;right:0px'> &times;</button><img src='../../001.png' class='doubclic'></br><a style='padding-left:10px'>双击后打开</a></div>";
-    //
-    //                }
-    //                if (this_ == "inputs_three") {
-    //                    innerImg_three.innerHTML += "<div class='_imgs' style='width:80px;height:80px;text-align:center;position: relative'><button type='button' style='position:absolute;top 0px;right:0px'> &times;</button><img src='../../001.png' class='doubclic'></br><a style='padding-left:10px'>双击后打开</a></div>";
-    //
-    //                }
-    //                if (this_ == "inputs_four") {
-    //                    innerImg_four.innerHTML += "<div class='_imgs' style='width:80px;height:80px;text-align:center;position: relative'><button type='button' style='position:absolute;top 0px;right:0px'> &times;</button><img src='../../001.png' class='doubclic'></br><a style='padding-left:10px'>双击后打开</a></div>";
-    //
-    //                }
-    //            };
-    //        }
-    //    });
     //双击后打开
     $("#desti").on("dblclick", "div", function () {
         $("iframe").css("display", "block");

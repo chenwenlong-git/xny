@@ -1,7 +1,9 @@
 .form-group2 {
     margin-bottom: 5px;
 }
-
+.form-group {
+    margin-bottom: 5px;
+}
 .form-group label,.form-group2 label {
     text-align: right;
     min-width: 85px;

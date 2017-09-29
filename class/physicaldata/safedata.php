@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../../public/css/wx-app.css">
     <link rel="stylesheet" href="../../public/css/wx-web.css">
     <link rel="stylesheet" href="../../public/css/webuploader.css">
-    <link rel="stylesheet" href="../../external/uploadify/uploadify.css">
     <script src="/js/project.js"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -144,7 +143,7 @@
         accept: {
             title: 'Images',
             extensions: 'gif,jpg,jpeg,bmp,png',
-            mimeTypes: 'image/*'
+            mimeTypes: 'image/jpg,image/jpeg,image/png,image/gif'
         }
     });
     uploader.on('fileQueued', function (file) {
@@ -235,7 +234,7 @@
         accept: {
             title: 'Images',
             extensions: 'gif,jpg,jpeg,bmp,png',
-            mimeTypes: 'image/*'
+            mimeTypes: 'image/jpg,image/jpeg,image/png,image/gif'
         }
     });
     uploader1.on('fileQueued', function (file) {

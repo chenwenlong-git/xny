@@ -148,6 +148,7 @@ switch ($act) {
 //        print_r($_POST);exit;
         $arr = array();
         if ($_POST) {
+            $path = "../../uploads/image/";
             $VinCode= $_POST["VinCode"]?$_POST["VinCode"]:"";
             if(!$VinCode){
                 outData(2, "请输入Vin码");
@@ -180,7 +181,7 @@ switch ($act) {
             if(!$MotorNum){
                 outData(2, "请输入电机号");
             }
-            $arr[$fieldName]=$url;
+            $arr[$fieldName]=$path.$url;
             $arr["CarModels"]=$CarModels;
             $arr["SerialNum"]=$SerialNum;
             $arr["MotorNum"]=$MotorNum;
@@ -197,16 +198,13 @@ switch ($act) {
                         outData(2, $name."增加失败");
                     }
                 }
-
             }else{
                 $arr["RegTime"] = date("Y-m-d H:i:s");
                 $arr["ModTime"] = date("Y-m-d H:i:s");
                 $arr["VinCode"]=$VinCode;
-
                 $rel = $db->save("com_datasafe", $arr);
                 if ($rel) outData(1, $name."增加成功");
                 outData(2, $name."增加失败");
-
             }
 
 //        print_r($arr);exit;
