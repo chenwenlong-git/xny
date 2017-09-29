@@ -440,7 +440,7 @@ var uploadTools = {
             var percent = 0;
             var bytesRead = 0;
             var intervalId = setInterval(function(){
-                bytesRead+=50000;
+                bytesRead+=500000;
 
                 if(!opt.scheduleStandard){
                     percent = bytesRead/filesDataAmount*100;

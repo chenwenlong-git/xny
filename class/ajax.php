@@ -156,7 +156,6 @@ switch ($act) {
             if (!preg_match('/^(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{17}$/', $VinCode)) {
                 outData('2', 'Vin码请输入17位字母和数字的组合', 'VinCode');
             }
-            $url = $_POST["url"]?$_POST["url"]:"";
             $type=$_POST["type"]?$_POST["type"]:"";
             $CarModels=$_POST["CarModels"]?$_POST["CarModels"]:"";
             $SerialNum=$_POST["SerialNum"]?$_POST["SerialNum"]:"";
@@ -169,9 +168,6 @@ switch ($act) {
                 $name="检测线数据";
                 $fieldName="JcxUrl";
             }
-            if(!$url){
-                outData(2, "上传失败，请选择".$name."图片导入");
-            }
             if(!$CarModels){
                 outData(2, "请输入车型");
             }
@@ -181,10 +177,18 @@ switch ($act) {
             if(!$MotorNum){
                 outData(2, "请输入电机号");
             }
-            $arr[$fieldName]=$path.$url;
             $arr["CarModels"]=$CarModels;
             $arr["SerialNum"]=$SerialNum;
             $arr["MotorNum"]=$MotorNum;
+            $imgarr=array();
+            foreach($_FILES as $k=>$v){
+                $name2=strstr($v["name"],".");
+                $fileName = time().rand(1,9).rand(1,9).rand(1,9).rand(1,9).rand(1,9).$name2;
+                move_uploaded_file($v["tmp_name"],"../uploads/image/" .$fileName);
+                $imgarr[]="../uploads/image/" .$fileName;
+            }
+            $Url=json_encode($imgarr,JSON_UNESCAPED_SLASHES);
+            $arr[$fieldName]=$Url;
             $temp = $db->find("select * from com_datasafe where VinCode='" . $_POST["VinCode"] . "'");
             if($temp){
                 $arr["ModTime"] = date("Y-m-d H:i:s");
@@ -216,25 +220,18 @@ switch ($act) {
     //录入性能数据
     case "addPerforData":
 //        if (!isset($_SESSION['uName'])) outData(2, "你还没有权限");
-//        print_r($_POST);exit;
+
         $arr = array();
         if ($_POST) {
             $VinCode= $_POST["VinCode"]?$_POST["VinCode"]:"";
             if (!preg_match('/^(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{17}$/', $VinCode)) {
                 outData('2', 'Vin码请输入17位字母和数字的组合', 'VinCode');
             }
-            $Url = $_POST["Url"]?$_POST["Url"]:"";
             $type=$_POST["type"]?$_POST["type"]:"";
             $name="";$fieldName="";
             if($type==0){
-                $name="电池数据文件";
-                $fieldName="BatteryData";
-            }else if($type==1){
                 $name="电池数据截屏图片";
                 $fieldName="BatteryImgUrl";
-            }else if($type==2){
-                $name="系统数据文件";
-                $fieldName="SysData";
             }else{
                 $name="系统数据截屏图片";
                 $fieldName="SysImgUrl";
@@ -242,11 +239,21 @@ switch ($act) {
             if(!$VinCode){
                 outData(2, "VIN码不能为空");
             }
-            if(!$Url){
-                outData(2, $name."文件为空,请选择文件导入！");
-            }
+//            if(!$Url){
+//                outData(2, $name."文件为空,请选择文件导入！");
+//            }
 
             $arr["ModTime"] = date("Y-m-d H:i:s");
+            $imgarr=array();
+            foreach($_FILES as $k=>$v){
+                $name2=strstr($v["name"],".");
+                $fileName = time().rand(1,9).rand(1,9).rand(1,9).rand(1,9).rand(1,9).$name2;
+                move_uploaded_file($v["tmp_name"],"../uploads/image/" .$fileName);
+                $imgarr[]="../uploads/image/" .$fileName;
+            }
+            $Url=json_encode($imgarr,JSON_UNESCAPED_SLASHES);
+//            print_r($Url);
+//            print_r($_FILES);exit;
             $arr[$fieldName]=$Url;
             $temp = $db->find("select * from com_datasafe where VinCode='" . $VinCode . "'");
             if($temp){//修改
@@ -279,6 +286,7 @@ switch ($act) {
     //录入性能EXCEL数据
     case "perforExcel":
         //define('ROOT_PATH', dirname(dirname(__FILE__)) . '');
+//        print_r($_FILES);exit;
         if (isset($_SESSION['UsrId'])) { $UsrId=$_SESSION['UsrId']; }else{ $UsrId=0; }
         $VinCode= $_POST["VinCode"]?$_POST["VinCode"]:"";
         if (!preg_match('/^(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{17}$/', $VinCode)) {
@@ -308,7 +316,7 @@ switch ($act) {
             "maxSize" => 2048000,
             "allowFiles" => $arr
         );
-        $up = new Uploader('newcel', $config);
+        $up = new Uploader('file0', $config);
         $img = $up->getFileInfo();
         if(empty($img["url"])){
             outData(2, "请先导入EXCEL");

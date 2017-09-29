@@ -9,7 +9,11 @@
     min-width: 85px;
     margin-right: 5px;
 }
+.form-group input,.form-group2 input {
+    min-width: 240px;
+    width: 240px;
 
+}
 .QP-img label {
     text-align: right;
     min-width: 85px;
