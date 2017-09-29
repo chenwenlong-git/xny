@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../../public/css/wx-app.css">
     <link rel="stylesheet" href="../../public/css/wx-web.css">
     <link rel="stylesheet" href="../../public/css/webuploader.css">
-    <link rel="stylesheet" href="../../external/uploadify/uploadify.css">
     <script src="/js/project.js"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -47,15 +46,15 @@
                 </div>
                 <div class="commondata form-group2">
                     <label for="firstname">车型：</label>
-                    <input type="text" class="form-control CarModels" id="" placeholder="请输入车型编号" attr="CarModels" title="车型">
+                    <input type="text" class="form-control CarModels" id="CarModels" placeholder="请输入车型编号" attr="CarModels" title="车型">
                 </div>
                 <div class="commondata form-group2">
                     <label for="firstname">生产流水号：</label>
-                    <input type="text" class="form-control SerialNum" id="" placeholder="请输入生产流水号" attr="SerialNum" title="生产流水号">
+                    <input type="text" class="form-control SerialNum" id="SerialNum" placeholder="请输入生产流水号" attr="SerialNum" title="生产流水号">
                 </div>
                 <div class="commondata form-group2">
                     <label for="firstname">电机号：</label>
-                    <input type="text" class="form-control MotorNum" id="" placeholder="请输入电机号" attr="MotorNum" title="电机号">
+                    <input type="text" class="form-control MotorNum" id="MotorNum" placeholder="请输入电机号" attr="MotorNum" title="电机号">
                 </div>
             </form>
             <div class="navbar navbar-default"><span class="navbar-brand">QP单</span></div>
@@ -63,7 +62,7 @@
 
                 <div class="commondata form-group QP-img">
                     <label for="firstname">QP单(图)：</label>
-                    <input type="text" class="form-control ImgUrl inputs_0" id="qpyrl" placeholder="请选择QP单图片导入" attr="ImgUrl" title="QP单(图)" readonly="readonly">
+                    <input type="text" class="form-control ImgUrl inputs_0" id="qpurl" placeholder="请选择QP单图片导入" attr="ImgUrl" title="QP单(图)" readonly="readonly">
                     <div id="uploadimg">
                         <div id="fileList" class="uploader-list"></div>
                         <div id="imgPicker">选择图片</div>
@@ -144,7 +143,7 @@
         accept: {
             title: 'Images',
             extensions: 'gif,jpg,jpeg,bmp,png',
-            mimeTypes: 'image/*'
+            mimeTypes: 'image/jpg,image/jpeg,image/png,image/gif'
         }
     });
     uploader.on('fileQueued', function (file) {
@@ -226,7 +225,7 @@
 
 
     //检测线数据上传
-    var uploader = WebUploader.create({
+    var uploader1 = WebUploader.create({
         auto: true, // 选完文件后，是否自动上传
         swf: 'js/Uploader.swf', // swf文件路径
         server: '../ajax.php?act=uploadify', // 文件接收服务端
@@ -235,10 +234,10 @@
         accept: {
             title: 'Images',
             extensions: 'gif,jpg,jpeg,bmp,png',
-            mimeTypes: 'image/*'
+            mimeTypes: 'image/jpg,image/jpeg,image/png,image/gif'
         }
     });
-    uploader.on('fileQueued', function (file) {
+    uploader1.on('fileQueued', function (file) {
         var $list = $("#fileList2"),
             $li = $(
                 '<div id="' + file.id+"_2" + '" class="file-item thumbnail" style="display: inline-block;margin-right: 15px;"><button onclick="removeData(this);" type="button" style="z-index:999;position:absolute;top 0px;right:0px;top:-1px;"> &times;</button>' +
@@ -250,7 +249,7 @@
         // $list为容器jQuery实例
         $list.append($li);
         // 创建缩略图
-        uploader.makeThumb(file, function (error, src) {
+        uploader1.makeThumb(file, function (error, src) {
             if (error) {
                 $img.replaceWith('<span>不能预览</span>');
                 return;
@@ -260,7 +259,7 @@
         }, 100, 100); //100x100为缩略图尺寸
     });
     // 文件上传过程中创建进度条实时显示。
-    uploader.on('uploadProgress', function (file, percentage) {
+    uploader1.on('uploadProgress', function (file, percentage) {
         var $li = $('#' + file.id+"_2" ),
             $percent = $li.find('.progress span');
         // 避免重复创建
@@ -273,9 +272,7 @@
     });
 
     // 文件上传成功，给item添加成功class, 用样式标记上传成功。
-    uploader.on('uploadSuccess', function (file, res) {
-        console.log(res);//这里可以得到上传后的文件路径
-        console.log(999);//这里可以得到上传后的文件路径
+    uploader1.on('uploadSuccess', function (file, res) {
         $('#' + file.id+"_2").addClass('upload-state-done');
         $('#' + file.id+"_2").find(".datainfo2").html(res.data);
         var time=new Date().toLocaleString(); //获取当前时间
@@ -286,10 +283,15 @@
             $("#err").prepend("<p style='color:red;'>"+res.message+"  "+time+"</p>");
             $(".op-err").click();
         }
+        var dataname="";
+        $('.datainfo2').each(function () {
+            dataname+=$(this).html()+";";
+        });
+        console.log(dataname);
+        $(".inputs_1").val(dataname);
     });
-
     // 文件上传失败，显示上传出错。
-    uploader.on('uploadError', function (file) {
+    uploader1.on('uploadError', function (file) {
         var $li = $('#' + file.id+"_2"),
             $error = $li.find('div.error');
 
@@ -302,10 +304,10 @@
     });
 
     // 完成上传完了，成功或者失败，先删除进度条。
-    uploader.on('uploadComplete', function (file) {
+    uploader1.on('uploadComplete', function (file) {
         $('#' + file.id+"_2").find('.progress').remove();
     });
-    uploader.on('fileDequeued', function (file) {
+    uploader1.on('fileDequeued', function (file) {
 
         fileCount--;
         removeFile(file);

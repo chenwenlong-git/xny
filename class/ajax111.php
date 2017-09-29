@@ -148,7 +148,6 @@ switch ($act) {
 //        print_r($_POST);exit;
         $arr = array();
         if ($_POST) {
-            $path = "../../uploads/image/";
             $VinCode= $_POST["VinCode"]?$_POST["VinCode"]:"";
             if(!$VinCode){
                 outData(2, "请输入Vin码");
@@ -181,10 +180,7 @@ switch ($act) {
             if(!$MotorNum){
                 outData(2, "请输入电机号");
             }
-            $arr[$fieldName]=$path.$url;
-            $arr["CarModels"]=$CarModels;
-            $arr["SerialNum"]=$SerialNum;
-            $arr["MotorNum"]=$MotorNum;
+            $arr[$fieldName]=$url;
             $temp = $db->find("select * from com_datasafe where VinCode='" . $_POST["VinCode"] . "'");
             if($temp){
                 $arr["ModTime"] = date("Y-m-d H:i:s");
@@ -198,13 +194,18 @@ switch ($act) {
                         outData(2, $name."增加失败");
                     }
                 }
+
             }else{
                 $arr["RegTime"] = date("Y-m-d H:i:s");
                 $arr["ModTime"] = date("Y-m-d H:i:s");
                 $arr["VinCode"]=$VinCode;
+                $arr["CarModels"]=$CarModels;
+                $arr["SerialNum"]=$SerialNum;
+                $arr["MotorNum"]=$MotorNum;
                 $rel = $db->save("com_datasafe", $arr);
                 if ($rel) outData(1, $name."增加成功");
                 outData(2, $name."增加失败");
+
             }
 
 //        print_r($arr);exit;
@@ -275,141 +276,6 @@ switch ($act) {
             outData(2, "操作失败");
         }
         outData(2, "操作有误");
-
-    //录入性能EXCEL数据
-    case "perforExcel":
-        //define('ROOT_PATH', dirname(dirname(__FILE__)) . '');
-        if (isset($_SESSION['UsrId'])) { $UsrId=$_SESSION['UsrId']; }else{ $UsrId=0; }
-        $VinCode= $_POST["VinCode"]?$_POST["VinCode"]:"";
-        if (!preg_match('/^(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{17}$/', $VinCode)) {
-            outData('2', 'Vin码请输入17位字母和数字的组合', 'VinCode');
-        }
-        $type= $_POST["type"]?$_POST["type"]:"";
-        $temp = $db->find("select * from com_datasafe where VinCode='" . $_POST["VinCode"] . "'");
-        $name="";$fieldName="";
-        if($type==0){
-            $name="电池数据文件";
-            $fieldName="BatteryData";
-        }else if($type==1){
-            $name="系统数据文件";
-            $fieldName="SysData";
-        }
-//        $name = 'newcel';
-        require_once ROOT_PATH . 'include/Uploader.class.php';
-        require_once ROOT_PATH . 'external/PHPExcel/Classes/PHPExcel.php';
-        $arr = array(
-            ".xls",
-            ".xlsx",
-            ".csv"
-        );
-        $config = array(
-            //  "pathFormat" =>"/upimage/".date("Y-m-d H:i:s"),
-            "pathFormat" => "uploads/xlsx/" . time(),
-            "maxSize" => 2048000,
-            "allowFiles" => $arr
-        );
-        $up = new Uploader('newcel', $config);
-        $img = $up->getFileInfo();
-        if(empty($img["url"])){
-            outData(2, "请先导入EXCEL");
-        }
-        $filename = ROOT_PATH ."uploads/xlsx/".$img['title'];
-        $filename = str_replace('\\', '/', $filename);
-        $info=pathinfo($filename);
-
-        if($info['extension']!="xlsx"&&$info['extension']!="xls"){
-            outData(2, "导入文件格式不对，请导入xlsx或xls格式的表格");
-        }
-        // Check prerequisites
-        if (!file_exists($filename)) {
-            outData(2,"上传失败！");
-        }else{
-            $filename=substr($filename,-30);
-            $filename1=substr($filename,-28);
-            $filename= "http://".$_SERVER['HTTP_HOST'].$filename;
-
-            /**对excel里的日期进行格式转化*/
-            function GetData($val){
-                $jd = GregorianToJD(1, 1, 1970);
-                $gregorian = JDToGregorian($jd+intval($val)-25569);
-                return $gregorian;/**显示格式为 “月/日/年” */
-            }
-
-            $filePath = "../".$filename1;
-
-            $PHPExcel = new PHPExcel();
-
-            /**默认用excel2007读取excel，若格式不对，则用之前的版本进行读取*/
-            $PHPReader = new PHPExcel_Reader_Excel2007();
-            if(!$PHPReader->canRead($filePath)){
-                $PHPReader = new PHPExcel_Reader_Excel5();
-                if(!$PHPReader->canRead($filePath)){
-                    echo 'no Excel';
-                    return ;
-                }
-            }
-
-            $PHPExcel = $PHPReader->load($filePath);
-            /**读取excel文件中的第一个工作表*/
-            $currentSheet = $PHPExcel->getSheet(0);
-            /**取得最大的列号*/
-            $allColumn = $currentSheet->getHighestColumn();
-            /**取得一共有多少行*/
-            $allRow = $currentSheet->getHighestRow();
-            /**从第二行开始输出，因为excel表中第一行为列名*/
-            $y=0;
-            for($currentRow = 4;$currentRow <= $allRow;$currentRow++){
-                /**从第A列开始输出*/
-                $i=0;
-                for($currentColumn = 'A'; $currentColumn !=$allColumn; $currentColumn++){ //大于26列
-                    if($i>25){
-                        $num =ord($currentColumn)+$i;
-                    }else{
-                        $num =ord($currentColumn);
-                    }
-                    $val = $currentSheet->getCellByColumnAndRow($num - 65,$currentRow)->getValue(); /*ord()将字符转为十进制数*/
-
-                        $data[$y][$i]=$val;
-
-                    $i++;
-                }
-                $y++;
-            }
-
-
-            $jsoninfo =json_encode($data,JSON_UNESCAPED_UNICODE); // 转义字符串
-//            echo $jsoninfo;exit;
-            $result= array(
-                $fieldName =>$jsoninfo
-            );
-            $result["ModTime"] = date("Y-m-d H:i:s");
-            if($temp){
-                if($temp[$fieldName]){
-                    outData(2, "该VIN码对应".$name."已存在，请修改");
-                }else{
-                    $relUpdate = $db->update("com_datasafe", $result, "VinCode='".$VinCode."'");
-                    if($relUpdate){
-                        outData(1, $name."增加成功");
-                    }else{
-                        outData(2, $name."增加失败");
-                    }
-                }
-            }else{
-                $result["VinCode"]=$VinCode;
-                $result["RegTime"] = date("Y-m-d H:i:s");
-                $rel = $db->save("com_datasafe", $result);
-                if ($rel) {
-                    if ($rel) outData(1, $name."增加成功");
-
-                } else {
-                    outData(2, $name."增加失败");
-
-                }
-            }
-            if ($rel) outData(1, "上传成功！");
-
-            outData(2, "上传失败！");
-        }
 
     //检索VIN码
     case "checkVinCode":
@@ -532,261 +398,6 @@ switch ($act) {
             outData(2, "操作失败");
         }
         outData(2, "请输入订单号");
-
-      //上传车辆录入信息表
-    case "TraceDataCar":
-          //define('ROOT_PATH', dirname(dirname(__FILE__)) . '');
-		if (isset($_SESSION['UsrId'])) { $UsrId=$_SESSION['UsrId']; }else{ $UsrId=0; }
-	    $name = 'newcel';
-        require_once ROOT_PATH . 'include/Uploader.class.php';
-        require_once ROOT_PATH . 'external/PHPExcel/Classes/PHPExcel.php'; 
-        $arr = array(
-            ".xls",
-            ".xlsx",
-            ".csv"
-        );
-        $config = array(
-            //  "pathFormat" =>"/upimage/".date("Y-m-d H:i:s"),
-            "pathFormat" => "uploads/xlsx/" . time(),
-            "maxSize" => 2048000,
-            "allowFiles" => $arr
-        );
-        $up = new Uploader('newcel', $config);
-		$img = $up->getFileInfo();
-        if(empty($img["url"])){
-            outData(2, "请先导入EXCEL");
-        }
-        $filename = ROOT_PATH ."uploads/xlsx/".$img['title'];
-        $filename = str_replace('\\', '/', $filename);
-        $info=pathinfo($filename);
-
-        if($info['extension']!="xlsx"&&$info['extension']!="xls"){
-            outData(2, "导入文件格式不对，请导入xlsx或xls格式的表格");
-        }
-        // Check prerequisites
-        if (!file_exists($filename)) {
-            outData(2,"上传失败！");
-        }else{
-			$filename=substr($filename,-30);
-			$filename1=substr($filename,-28);
-			$filename= "http://".$_SERVER['HTTP_HOST'].$filename;
- 
-             /**对excel里的日期进行格式转化*/ 
-			function GetData($val){ 
-			$jd = GregorianToJD(1, 1, 1970); 
-			$gregorian = JDToGregorian($jd+intval($val)-25569); 
-			return $gregorian;/**显示格式为 “月/日/年” */ 
-			} 
-
-			$filePath = "../".$filename1; 
-
-			$PHPExcel = new PHPExcel(); 
-
-			/**默认用excel2007读取excel，若格式不对，则用之前的版本进行读取*/ 
-			$PHPReader = new PHPExcel_Reader_Excel2007(); 
-			if(!$PHPReader->canRead($filePath)){ 
-			$PHPReader = new PHPExcel_Reader_Excel5(); 
-			if(!$PHPReader->canRead($filePath)){ 
-			echo 'no Excel'; 
-			return ; 
-			} 
-			} 
-
-			$PHPExcel = $PHPReader->load($filePath); 
-			/**读取excel文件中的第一个工作表*/ 
-			$currentSheet = $PHPExcel->getSheet(0); 
-			/**取得最大的列号*/ 
-			$allColumn = $currentSheet->getHighestColumn(); 
-			/**取得一共有多少行*/ 
-			$allRow = $currentSheet->getHighestRow(); 
-			/**从第二行开始输出，因为excel表中第一行为列名*/ 
-             $y=0;
-			  for($currentRow = 2;$currentRow <= $allRow;$currentRow++){
-				  /**从第A列开始输出*/
-				  $i=0;
-				  $arr=array();
-				  for($currentColumn = 'A'; $currentColumn !=$allColumn; $currentColumn++){ //大于26列
-					 if($i>25){
-					   $num =ord($currentColumn)+$i;
-					 }else{
-						$num =ord($currentColumn);
-					 }
-					 $val = $currentSheet->getCellByColumnAndRow($num - 65,$currentRow)->getValue(); /*ord()将字符转为十进制数*/
-					 if($currentColumn == 'P' || $currentColumn == 'R' || $currentColumn == 'BB' || $currentColumn == 'CL' ) {
-						$arr[$i]=GetData($val); 
-		             }else{
-		                $arr[$i]=iconv('utf-8','utf-8', $val); 
-		             }
-					 if($currentColumn=="B"){
-					    $Remarks=$val;
-					 }
-					 if($currentColumn=="C"){
-					    $ClientInfo=$val;
-					 }
-					 if($currentColumn=="D"){
-					    $PaperNumber=$val;
-					 }
-					 if($currentColumn=="E"){
-					    $ClientNumber=$val;
-					 }
-					 if($currentColumn=="F"){
-					    $OperatingLine=$val;
-					 }
-					 if($currentColumn=="G"){
-					    $License=$val;
-					 }
-					 if($currentColumn=="H"){
-					    $SerialNumber=$val;
-					 }
-
-					  $i++;
-				  }
-			   $jsoninfo =json_encode($arr,JSON_UNESCAPED_UNICODE); // 转义字符串
-		       $data = array(
-				    "UsrId" =>$UsrId,
-				    "Remarks" =>$Remarks,
-				    "ClientInfo" =>$ClientInfo,
-				    "PaperNumber" =>$PaperNumber,
-				    "ClientNumber" =>$ClientNumber,
-				    "OperatingLine" =>$OperatingLine,
-				    "License" =>$License,
-				    "SerialNumber" =>$SerialNumber,
-				    "FileInfo" =>$filename1,
-                    "OtherData" =>$jsoninfo
-                );
-               $rel = $db->save("com_traceldata", $data);
-                  $y++;
-			   }
-		     if ($rel) outData(1, "上传成功！");
-
-             outData(2, "上传失败！");
-		}
-
-   //上传上海车辆录入信息表
-      case "TraceDatashCar":
-		if (isset($_SESSION['UsrId'])) { $UsrId=$_SESSION['UsrId']; }else{ $UsrId=0; }
-	    $name = 'newcel';
-        require_once ROOT_PATH . 'include/Uploader.class.php';
-        require_once ROOT_PATH . 'external/PHPExcel/Classes/PHPExcel.php'; 
-        $arr = array(
-            ".xls",
-            ".xlsx",
-            ".csv"
-        );
-        $config = array(
-            "pathFormat" => "uploads/xlsx/" . time(),
-            "maxSize" => 2048000,
-            "allowFiles" => $arr
-        );
-        $up = new Uploader('newcel', $config);
-		$img = $up->getFileInfo();
-        if(empty($img["url"])){
-            outData(2, "请先导入EXCEL");
-        }
-        $filename = ROOT_PATH ."uploads/xlsx/".$img['title'];
-        $filename = str_replace('\\', '/', $filename);
-        $info=pathinfo($filename);
-
-        if($info['extension']!="xlsx"&&$info['extension']!="xls"){
-            outData(2, "导入文件格式不对，请导入xlsx或xls格式的表格");
-        }
-        // Check prerequisites
-        if (!file_exists($filename)) {
-            outData(2,"上传失败！");
-        }else{
-			$filename=substr($filename,-30);
-			$filename1=substr($filename,-28);
-			$filename= "http://".$_SERVER['HTTP_HOST'].$filename;
- 
-             /**对excel里的日期进行格式转化*/ 
-			function GetData($val){ 
-			$jd = GregorianToJD(1, 1, 1970); 
-			$gregorian = JDToGregorian($jd+intval($val)-25569); 
-			return $gregorian;/**显示格式为 “月/日/年” */ 
-			} 
-
-			$filePath = "../".$filename1; 
-
-			$PHPExcel = new PHPExcel(); 
-
-			/**默认用excel2007读取excel，若格式不对，则用之前的版本进行读取*/ 
-			$PHPReader = new PHPExcel_Reader_Excel2007(); 
-			if(!$PHPReader->canRead($filePath)){ 
-			$PHPReader = new PHPExcel_Reader_Excel5(); 
-			if(!$PHPReader->canRead($filePath)){ 
-			echo 'no Excel'; 
-			return ; 
-			} 
-			} 
-
-			$PHPExcel = $PHPReader->load($filePath); 
-			/**读取excel文件中的第一个工作表*/ 
-			$currentSheet = $PHPExcel->getSheet(0); 
-			/**取得最大的列号*/ 
-			$allColumn = $currentSheet->getHighestColumn(); 
-			/**取得一共有多少行*/ 
-			$allRow = $currentSheet->getHighestRow(); 
-			/**从第二行开始输出，因为excel表中第一行为列名*/ 
-             $y=0;
-			  for($currentRow = 4;$currentRow <= $allRow;$currentRow++){
-				  /**从第A列开始输出*/
-				  $i=0;
-				  $arr=array();
-				  for($currentColumn = 'A'; $currentColumn !=$allColumn; $currentColumn++){ //大于26列
-					 if($i>25){
-					   $num =ord($currentColumn)+$i;
-					 }else{
-						$num =ord($currentColumn);
-					 }
-					 $val = $currentSheet->getCellByColumnAndRow($num - 65,$currentRow)->getValue(); /*ord()将字符转为十进制数*/
-		             if($currentColumn == 'H' || $currentColumn == 'E' || $currentColumn == 'F'  ) {
-						$arr[$i]=GetData($val); 
-		             }else{
-		                $arr[$i]=iconv('utf-8','utf-8', $val); 
-		             }
-					 if($currentColumn=="B"){
-					    $Remarks=$val;
-					 }
-					 if($currentColumn=="C"){
-					    $VinCode=$val;
-					 }
-
-					  $i++;
-				  }
-			   $jsoninfo =json_encode($arr,JSON_UNESCAPED_UNICODE); // 转义字符串
-		       $data = array(
-				    "UsrId" =>$UsrId,
-				    "Remarks" =>$Remarks,
-				    "VinCode" =>$VinCode,
-				    "FileInfo" =>$filename1,
-                    "OtherData" =>$jsoninfo
-                );
-			   if($Remarks!=""){  //B列数据不为空的才写进数据
-               $rel = $db->save("com_tracelshdata", $data);
-			   }
-                  $y++;
-			   }
-		     if ($rel) outData(1, "上传成功！");
-
-             outData(2, "上传失败！");
-		}
-
-    //上传上海车辆录入信息表
-     case "PartsReport":
-       if (isset($_SESSION['UsrId'])) { $UsrId=$_SESSION['UsrId']; }else{ $UsrId=0; }
-       $allimgarr=json_decode($_POST['allimgarr']);
-	   foreach($allimgarr as $k=>$v){
-         $FileInfo=substr($v,5);
-	     $data = array(
-				    "UsrId" =>$UsrId,
-				    "FileInfo" =>$FileInfo
-             );
-	      $rel = $db->save("com_partsreport", $data);
-	   }
-	    if ($rel) outData(1, "上传成功！");
-
-      outData(2, "上传失败！");
-
     default:
         return;
 }
